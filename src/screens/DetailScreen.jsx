@@ -1,8 +1,12 @@
 import React from 'react'
+import Mesothelioma from '../components/Mesothelioma.Form'
 
 const DetailScreen = () => {
+
   return (
-    <div>DetailScreen</div>
+    <div className='flex items-center justify-center'>
+        <Mesothelioma />
+    </div>
   )
 }
 

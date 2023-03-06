@@ -42,6 +42,7 @@ const ChronicKidneyDiease = () => {
 
   return (
     <div className='w-full items-center justify-center'>
+        
         <form onSubmit={handleSubmit}>
             <div className='flex items-center justify-center  flex-col mt-10 py-4'>
                 <label htmlFor='age' className='font-semibold w-[90%] max-w-sm'>Age</label>

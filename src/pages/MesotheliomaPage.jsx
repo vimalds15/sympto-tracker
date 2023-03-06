@@ -1,7 +1,7 @@
 import React from 'react'
 import Mesothelioma from '../components/Mesothelioma.Form'
 
-const DetailScreen = () => {
+const MesotheliomaPage = () => {
 
   return (
     <div className='flex items-center justify-center'>
@@ -10,4 +10,4 @@ const DetailScreen = () => {
   )
 }
 
-export default DetailScreen
+export default MesotheliomaPage

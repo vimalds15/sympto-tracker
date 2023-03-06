@@ -18,6 +18,23 @@ export const mesotheliomaSchema = yup.object({
   chestPain: yup.string().required("Required"),
 });
 
+export const liverCirrhosisSchema = yup.object({
+  age: yup.number().positive().integer().required("Required"),
+  gender: yup.string().required("Required"),
+  drug:yup.string().required("Required"),
+  presenceOfAscites:yup.string().required("Required"),
+  presenceOfHepatomegaly:yup.string().required("Required"),
+  presenceOfSpiders:yup.string().required("Required"),
+  presenceOfEdema:yup.string().required("Required"),
+  serumBilirubin:yup.string().required("Required"),
+  serumCholesterol:yup.string().required("Required"),
+  albumin:yup.string().required("Required"),
+  sgot:yup.string().required("Required"),
+  triglycerides:yup.string().required("Required"),
+  plateletsPerCubic:yup.string().required("Required"),
+  prothrombinTimeInSec:yup.string().required("Required"),
+})
+
 export const coronaryHeartDisease = yup.object({
   age: yup.number().positive().integer("Must be Integer").required("Required"),
   gender: yup.string().required("Required"),

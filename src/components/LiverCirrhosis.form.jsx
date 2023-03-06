@@ -68,18 +68,18 @@ const LiverCirrhosis = () => {
                         <option value="D-Penicillamine" label='D-Penicillamine'>D-Penicillamine</option>
                         <option value="Placebo" label='Placebo'>Placebo</option>
                     </select>
-                    {errors.smoking && touched.smoking && <p className='w-[90%] max-w-sm font-medium text-red-500'>{errors.smoking}</p>}
+                    {errors.drug && touched.drug && <p className='w-[90%] max-w-sm font-medium text-red-500'>{errors.drug}</p>}
 
-                    <label htmlFor='yellowFingers' className='font-semibold w-[90%] max-w-sm mt-8'>Yellow Fingers</label>
+                    <label htmlFor='presenceOfAscites' className='font-semibold w-[90%] max-w-sm mt-8'>Presence of Ascites</label>
                     <select
-                        className={`h-12 w-[90%] max-w-sm font-semi-bold px-4 border-2 border-gray-300 rounded-sm outline-none hover:shadow-xl transition-shadow ${errors.yellowFingers && touched.yellowFingers ? "border-red-600" : ""}`}
-                        id="yellowFingers" value={values.yellowFingers} placeholder='Eg: Male'
+                        className={`h-12 w-[90%] max-w-sm font-semi-bold px-4 border-2 border-gray-300 rounded-sm outline-none hover:shadow-xl transition-shadow ${errors.presenceOfAscites && touched.presenceOfAscites ? "border-red-600" : ""}`}
+                        id="presenceOfAscites" value={values.presenceOfAscites} placeholder='Eg: Male'
                         onChange={handleChange}
                     ><option value="" label="Select an option" >--select an option--</option>
                         <option value="yes" label='Yes'>Yes</option>
                         <option value="no" label='No'>No</option>
                     </select>
-                    {errors.yellowFingers && touched.yellowFingers && <p className='w-[90%] max-w-sm font-medium text-red-500'>{errors.yellowFingers}</p>}
+                    {errors.presenceOfAscites && touched.presenceOfAscites && <p className='w-[90%] max-w-sm font-medium text-red-500'>{errors.presenceOfAscites}</p>}
 
                     <label htmlFor='anxiety' className='font-semibold w-[90%] max-w-sm mt-8'>Anxiety</label>
                     <select

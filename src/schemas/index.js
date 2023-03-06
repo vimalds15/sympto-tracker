@@ -56,11 +56,63 @@ export const coronaryHeartDisease = yup.object({
 export const diabetesMellitus = yup.object({
   age: yup.number().positive().integer("Must be Integer").required("Required"),
   gender: yup.string().required("Required"),
-  pregnancies: yup.number().positive().integer("Must be Integer").required("Required"),
-  glucose: yup.number().positive().integer("Must be Integer").required("Required"),
-  diastolicBloodPressure: yup.number().positive().integer("Must be Integer").required("Required"),
-  tricepsSkinFoldThickness: yup.number().positive().integer("Must be Integer").required("Required"),
-  serumInsulin: yup.number().positive().integer("Must be Integer").required("Required"),
-  bodyMassIndex: yup.number().positive().integer("Must be Integer").required("Required"),
-  diabetesPedigreeFunction: yup.number("Must be Numeric Digits").positive().required("Required"),
+  pregnancies: yup
+    .number()
+    .positive()
+    .integer("Must be Integer")
+    .required("Required"),
+  glucose: yup
+    .number()
+    .positive()
+    .integer("Must be Integer")
+    .required("Required"),
+  diastolicBloodPressure: yup
+    .number()
+    .positive()
+    .integer("Must be Integer")
+    .required("Required"),
+  tricepsSkinFoldThickness: yup
+    .number()
+    .positive()
+    .integer("Must be Integer")
+    .required("Required"),
+  serumInsulin: yup
+    .number()
+    .positive()
+    .integer("Must be Integer")
+    .required("Required"),
+  bodyMassIndex: yup
+    .number()
+    .positive()
+    .integer("Must be Integer")
+    .required("Required"),
+  diabetesPedigreeFunction: yup
+    .number("Must be Numeric Digits")
+    .positive()
+    .required("Required"),
+});
+
+export const chronicKidneyDisease = yup.object({
+  age: yup.number().positive().integer("Must be Integer").required("Required"),
+  bloodPressure: yup.number().positive().integer("Must be Integer").required("Required"),
+  specificGravity: yup.number().positive().integer("Must be Integer").required("Required"),
+  redBloodCellsInUrine: yup.string().required("Required"),
+  posCellInUrine: yup.string().required("Required"),
+  posCellClumpsInUrine: yup.string().required("Required"),
+  bacteriaInUrine: yup.string().required("Required"),
+  bloodGlucoseRandom: yup.number().positive().integer("Must be Integer").required("Required"),
+  bloodUrea: yup.number().positive().integer("Must be Integer").required("Required"),
+  serumCreatinine: yup.number().positive().integer("Must be Integer").required("Required"),
+  sodium: yup.number().positive().integer("Must be Integer").required("Required"),
+  potassium: yup.number().positive().integer("Must be Integer").required("Required"),
+  haemoglobin: yup.number().positive().integer("Must be Integer").required("Required"),
+  packedCellVolumeInPercentage: yup.number().positive().integer("Must be Integer").required("Required"),
+  whiteBloodCellCount: yup.number().positive().integer("Must be Integer").required("Required"),
+  redBloodCellCount: yup.number().positive().integer("Must be Integer").required("Required"),
+  hypertension: yup.string().required("Required"),
+  diabetesMellitus: yup.string().required("Required"),
+  coronaryArteryDisease: yup.string().required("Required"),
+  pedalEdema:yup.string().required("Required"),
+  appetite: yup.string().required("Required"),
+  anemia: yup.string().required("Required"),
 });

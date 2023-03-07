@@ -2,7 +2,7 @@ import React from 'react'
 import LiverCirrhosis from '../components/LiverCirrhosis.form'
 import Mesothelioma from '../components/Mesothelioma.Form'
 
-const DetailScreen = () => {
+const MesotheliomaPage = () => {
 
   return (
     <div className='flex items-center justify-center'>
@@ -12,4 +12,4 @@ const DetailScreen = () => {
   )
 }
 
-export default DetailScreen
+export default MesotheliomaPage

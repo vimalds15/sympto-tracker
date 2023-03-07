@@ -1,13 +1,25 @@
 
-import {HomeScreen,DetailScreen} from "../screens";
+import {ChronicKidneyDiseasePage, CoronaryHeartDiseasePage, DiabetesMellitusPage, HomePage,MesotheliomaPage} from "../pages";
 
 export const routes = [
     {
         path:'/',
-        element:<HomeScreen />
+        element:<HomePage />
     },
     {
-        path:'/detail/:id',
-        element:<DetailScreen />
-    }
+        path:'/detail/1',
+        element:<MesotheliomaPage/>
+    },
+    {
+        path:'/detail/3',
+        element:<ChronicKidneyDiseasePage />
+    },
+    {
+        path:'/detail/4',
+        element:<CoronaryHeartDiseasePage/>
+    },
+    {
+        path:'/detail/5',
+        element:<DiabetesMellitusPage/>
+    },
 ]

@@ -1,5 +1,5 @@
 
-import {ChronicKidneyDiseasePage, LiverCirrhosisPage, CoronaryHeartDiseasePage, DiabetesMellitusPage, HomePage,MesotheliomaPage} from "../pages";
+import {ChronicKidneyDiseasePage, CoronaryHeartDiseasePage, DiabetesMellitusPage, HomePage,LiverCirrhosisPage,MesotheliomaPage} from "../pages";
 
 export const routes = [
     {
@@ -8,7 +8,11 @@ export const routes = [
     },
     {
         path:'/detail/1',
-        element:<MesotheliomaPage/>
+        element:<MesotheliomaPage />
+    },
+    {
+        path:'/detail/2',
+        element:<LiverCirrhosisPage />
     },
     {
         path:'/detail/2',

@@ -1,5 +1,5 @@
 import React from 'react'
-import ChronicKidneyDiease from '../components/ChronicKidneyDisease'
+import ChronicKidneyDiease from '../components/ChronicKidneyDisease.Form'
 
 const ChronicKidneyDiseasePage = () => {
   return (

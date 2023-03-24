@@ -6,8 +6,7 @@ const MesotheliomaPage = () => {
 
   return (
     <div className='flex items-center justify-center'>
-        {/* <Mesothelioma /> */}
-        <LiverCirrhosis />
+        <Mesothelioma />
     </div>
   )
 }

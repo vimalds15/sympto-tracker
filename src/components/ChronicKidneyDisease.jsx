@@ -1,18 +1,26 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { useFormik } from 'formik'
 import { chronicKidneyDisease, coronaryHeartDisease, mesotheliomaSchema } from '../schemas'
 
-const onSubmit = (values,actions) => {
-    console.log(values)
-    console.log(actions)
-    actions.resetForm();
-}
 
 const ChronicKidneyDiease = () => {
 
-    
+    const [predicted, setPredicted] = useState(false);
+  const [result, setResult] = useState(null);
 
-    const {values,errors,touched,isSubmitting,handleBlur,handleChange,handleSubmit} = useFormik({
+  const onSubmit = async (values, actions) => {
+      const formData = Object.values(values);
+      console.log(formData);
+    // try {
+    //   const prediction = await DiseaseService.predictMesothelioma(formData);
+    //   setPredicted(true);
+    //   setResult(prediction);
+    //   console.log(prediction);
+    // } catch (error) {
+    //   console.error(error.message);
+    // }
+  }
+    const {values,errors,touched,isSubmitting,handleBlur,handleChange,handleSubmit,setFieldValue} = useFormik({
         initialValues:{
             age:"",
             bloodPressure:"",
@@ -40,7 +48,6 @@ const ChronicKidneyDiease = () => {
         validationSchema:chronicKidneyDisease,
         onSubmit,
     })
-
     console.log(errors)
 
   return (
@@ -82,10 +89,12 @@ const ChronicKidneyDiease = () => {
                 <select
                     className={`h-12 w-[90%] max-w-sm font-semi-bold px-4 border-2 border-gray-300 rounded-sm outline-none hover:shadow-xl transition-shadow ${errors.redBloodCellsInUrine && touched.redBloodCellsInUrine ? "border-red-600":""}`}
                 id="redBloodCellsInUrine" value={values.redBloodCellsInUrine} 
-                    onChange={handleChange}
+                onChange={(e) =>
+              setFieldValue("redBloodCellsInUrine", Number(e.target.value))
+            }
                 ><option value="" label="Select an option" >--select an option--</option>
-                    <option value="Normal" label='Normal'>Normal</option>
-                    <option value="Abnormal" label='Abnormal'>Abnormal</option>
+                    <option value={1} label='Normal'>Normal</option>
+                    <option value={0} label='Abnormal'>Abnormal</option>
                 </select>
                 {errors.redBloodCellsInUrine && touched.redBloodCellsInUrine && <p className='w-[90%] max-w-sm font-medium text-red-500'>{errors.redBloodCellsInUrine}</p>}
 
@@ -93,10 +102,12 @@ const ChronicKidneyDiease = () => {
                 <select
                     className={`h-12 w-[90%] max-w-sm font-semi-bold px-4 border-2 border-gray-300 rounded-sm outline-none hover:shadow-xl transition-shadow ${errors.posCellInUrine && touched.posCellInUrine ? "border-red-600":""}`}
                 id="posCellInUrine" value={values.posCellInUrine} 
-                    onChange={handleChange}
+                onChange={(e) =>
+              setFieldValue("posCellInUrine", Number(e.target.value))
+            }
                 ><option value="" label="Select an option" >--select an option--</option>
-                    <option value="Normal" label='Normal'>Normal</option>
-                    <option value="Abnormal" label='Abnormal'>Abnormal</option>
+                    <option value={1} label='Normal'>Normal</option>
+                    <option value={0} label='Abnormal'>Abnormal</option>
                 </select>
                 {errors.posCellInUrine && touched.posCellInUrine && <p className='w-[90%] max-w-sm font-medium text-red-500'>{errors.posCellInUrine}</p>}
 
@@ -104,10 +115,12 @@ const ChronicKidneyDiease = () => {
                 <select
                     className={`h-12 w-[90%] max-w-sm font-semi-bold px-4 border-2 border-gray-300 rounded-sm outline-none hover:shadow-xl transition-shadow ${errors.posCellClumpsInUrine && touched.posCellClumpsInUrine ? "border-red-600":""}`}
                 id="posCellClumpsInUrine" value={values.posCellClumpsInUrine} 
-                    onChange={handleChange}
+                onChange={(e) =>
+              setFieldValue("posCellClumpsInUrine", Number(e.target.value))
+            }
                 ><option value="" label="Select an option" >--select an option--</option>
-                    <option value="Present" label='Present'>Present</option>
-                    <option value="Not Present" label='Not Present'>Not Present</option>
+                    <option value={1} label='Present'>Present</option>
+                    <option value={0} label='Not Present'>Not Present</option>
                 </select>
                 {errors.posCellClumpsInUrine && touched.posCellClumpsInUrine && <p className='w-[90%] max-w-sm font-medium text-red-500'>{errors.posCellClumpsInUrine}</p>}
 
@@ -115,10 +128,12 @@ const ChronicKidneyDiease = () => {
                 <select
                     className={`h-12 w-[90%] max-w-sm font-semi-bold px-4 border-2 border-gray-300 rounded-sm outline-none hover:shadow-xl transition-shadow ${errors.bacteriaInUrine && touched.bacteriaInUrine ? "border-red-600":""}`}
                 id="bacteriaInUrine" value={values.bacteriaInUrine} 
-                    onChange={handleChange}
+                onChange={(e) =>
+              setFieldValue("bacteriaInUrine", Number(e.target.value))
+            }
                 ><option value="" label="Select an option" >--select an option--</option>
-                    <option value="Present" label='Present'>Present</option>
-                    <option value="Not Present" label='Not Present'>Not Present</option>
+                    <option value={1} label='Present'>Present</option>
+                    <option value={0} label='Not Present'>Not Present</option>
                 </select>
                 {errors.bacteriaInUrine && touched.bacteriaInUrine && <p className='w-[90%] max-w-sm font-medium text-red-500'>{errors.bacteriaInUrine}</p>}
                 
@@ -217,10 +232,12 @@ const ChronicKidneyDiease = () => {
                 <select
                     className={`h-12 w-[90%] max-w-sm font-semi-bold px-4 border-2 border-gray-300 rounded-sm outline-none hover:shadow-xl transition-shadow ${errors.hypertension && touched.hypertension ? "border-red-600":""}`}
                 id="hypertension" value={values.hypertension} 
-                    onChange={handleChange}
+                onChange={(e) =>
+              setFieldValue("hypertension", Number(e.target.value))
+            }
                 ><option value="" label="Select an option" >--select an option--</option>
-                    <option value="Yes" label='Yes'>Yes</option>
-                    <option value="No" label='No'>No</option>
+                    <option value={1} label='Yes'>Yes</option>
+                    <option value={0} label='No'>No</option>
                 </select>
                 {errors.hypertension && touched.hypertension && <p className='w-[90%] max-w-sm font-medium text-red-500'>{errors.hypertension}</p>}
 
@@ -228,10 +245,12 @@ const ChronicKidneyDiease = () => {
                 <select
                     className={`h-12 w-[90%] max-w-sm font-semi-bold px-4 border-2 border-gray-300 rounded-sm outline-none hover:shadow-xl transition-shadow ${errors.diabetesMellitus && touched.diabetesMellitus ? "border-red-600":""}`}
                 id="diabetesMellitus" value={values.diabetesMellitus} 
-                    onChange={handleChange}
+                onChange={(e) =>
+              setFieldValue("diabetesMellitus", Number(e.target.value))
+            }
                 ><option value="" label="Select an option" >--select an option--</option>
-                    <option value="Yes" label='Yes'>Yes</option>
-                    <option value="No" label='No'>No</option>
+                    <option value={1} label='Yes'>Yes</option>
+                    <option value={0} label='No'>No</option>
                 </select>
                 {errors.diabetesMellitus && touched.diabetesMellitus && <p className='w-[90%] max-w-sm font-medium text-red-500'>{errors.diabetesMellitus}</p>}
 
@@ -239,10 +258,12 @@ const ChronicKidneyDiease = () => {
                 <select
                     className={`h-12 w-[90%] max-w-sm font-semi-bold px-4 border-2 border-gray-300 rounded-sm outline-none hover:shadow-xl transition-shadow ${errors.coronaryArteryDisease && touched.coronaryArteryDisease ? "border-red-600":""}`}
                 id="coronaryArteryDisease" value={values.coronaryArteryDisease} 
-                    onChange={handleChange}
+                onChange={(e) =>
+              setFieldValue("coronaryArteryDisease", Number(e.target.value))
+            }
                 ><option value="" label="Select an option" >--select an option--</option>
-                    <option value="Yes" label='Yes'>Yes</option>
-                    <option value="No" label='No'>No</option>
+                    <option value={1} label='Yes'>Yes</option>
+                    <option value={0} label='No'>No</option>
                 </select>
                 {errors.coronaryArteryDisease && touched.coronaryArteryDisease && <p className='w-[90%] max-w-sm font-medium text-red-500'>{errors.coronaryArteryDisease}</p>}
 
@@ -250,10 +271,12 @@ const ChronicKidneyDiease = () => {
                 <select
                     className={`h-12 w-[90%] max-w-sm font-semi-bold px-4 border-2 border-gray-300 rounded-sm outline-none hover:shadow-xl transition-shadow ${errors.appetite && touched.appetite ? "border-red-600":""}`}
                 id="appetite" value={values.appetite} 
-                    onChange={handleChange}
+                onChange={(e) =>
+              setFieldValue("appetite", Number(e.target.value))
+            }
                 ><option value="" label="Select an option" >--select an option--</option>
-                    <option value="Good" label='Good'>Good</option>
-                    <option value="Poor" label='Poor'>Poor</option>
+                    <option value={0} label='Good'>Good</option>
+                    <option value={1} label='Poor'>Poor</option>
                 </select>
                 {errors.appetite && touched.appetite && <p className='w-[90%] max-w-sm font-medium text-red-500'>{errors.appetite}</p>}
 
@@ -261,10 +284,12 @@ const ChronicKidneyDiease = () => {
                 <select
                     className={`h-12 w-[90%] max-w-sm font-semi-bold px-4 border-2 border-gray-300 rounded-sm outline-none hover:shadow-xl transition-shadow ${errors.pedalEdema && touched.pedalEdema ? "border-red-600":""}`}
                 id="pedalEdema" value={values.pedalEdema} 
-                    onChange={handleChange}
+                onChange={(e) =>
+              setFieldValue("pedalEdema", Number(e.target.value))
+            }
                 ><option value="" label="Select an option" >--select an option--</option>
-                    <option value="Yes" label='Yes'>Yes</option>
-                    <option value="No" label='No'>No</option>
+                    <option value={1} label='Yes'>Yes</option>
+                    <option value={0} label='No'>No</option>
                 </select>
                 {errors.pedalEdema && touched.pedalEdema && <p className='w-[90%] max-w-sm font-medium text-red-500'>{errors.pedalEdema}</p>}
 
@@ -272,15 +297,23 @@ const ChronicKidneyDiease = () => {
                 <select
                     className={`h-12 w-[90%] max-w-sm font-semi-bold px-4 border-2 border-gray-300 rounded-sm outline-none hover:shadow-xl transition-shadow ${errors.anemia && touched.anemia ? "border-red-600":""}`}
                 id="anemia" value={values.anemia} 
-                    onChange={handleChange}
+                onChange={(e) =>
+              setFieldValue("anemia", Number(e.target.value))
+            }
                 ><option value="" label="Select an option" >--select an option--</option>
-                    <option value="Yes" label='Yes'>Yes</option>
-                    <option value="No" label='No'>No</option>
+                    <option value={1} label='Yes'>Yes</option>
+                    <option value={0} label='No'>No</option>
                 </select>
                 {errors.anemia && touched.anemia && <p className='w-[90%] max-w-sm font-medium text-red-500'>{errors.anemia}</p>}
 
                 <button disabled={isSubmitting} className='my-10 bg-black disabled:opacity-30 text-gray-100 py-4 px-4 rounded' type="submit">Predict</button>
 
+                {predicted &&
+            (result === 1 ? (
+              <p>Yes, you have this disease</p>
+            ) : (
+              <p>No, you dont have this disease</p>
+            ))} 
             </div>
         </form>
     </div>

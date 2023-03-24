@@ -1,7 +1,9 @@
 import * as yup from "yup";
 
 export const mesotheliomaSchema = yup.object({
-    age: yup.number().positive().integer().required("Required"),
+    age:  yup.string()
+    .required('Please fill in your age')
+    .typeError('Please enter a valid number for your age'),
     gender: yup.string().required("Required"),
     smoking:yup.string().required("Required"),
     yellowFingers:yup.string().required("Required"),

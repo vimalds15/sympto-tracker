@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useFormik } from "formik";
 import { mesotheliomaSchema } from "../schemas";
-import axios from "axios";
 import DiseaseService from "../api/disease/disease";
 
 const Mesothelioma = () => {
@@ -20,33 +19,6 @@ const Mesothelioma = () => {
       console.error(error.message);
     }
   };
-
-  //   const predictResult = async (values) => {
-
-  //     const formData = Object.values(values);
-  //   //   const data1 = [31, 0, 1, 1, 1, 0, 1, 1, 0, 1, 0, 1, 1, 0, 1];
-  //     try {
-  //       const config = {
-  //         headers: {
-  //           "Content-Type": "application/json",
-  //         },
-  //       };
-  //       const { data } = await axios.post(
-  //         "http://127.0.0.1:5000/predict/mesothelioma",
-  //         formData,config
-  //       );
-  //       const {prediction} = data;
-  //       setPredict(prediction)
-  //       console.log(data);
-  //     } catch (error) {
-  //       console.error(error.message);
-  //     }
-  //   };
-
-  //   const onSubmit = (values, actions) => {
-  //     predictResult(values);
-  //     // actions.resetForm();
-  //   };
 
   const {
     values,

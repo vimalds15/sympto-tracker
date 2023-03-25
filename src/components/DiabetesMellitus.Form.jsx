@@ -1,9 +1,7 @@
 import React, { useState } from 'react'
 import { useFormik } from 'formik'
 import {
-  coronaryHeartDisease,
-  diabetesMellitus,
-  mesotheliomaSchema,
+  diabetesMellitus
 } from '../schemas'
 import DiseaseService from '../api/disease/disease'
 
@@ -23,7 +21,7 @@ const DiabetesMellitus = () => {
       console.error(error.message)
     }
   }
-  
+
   const {
     values,
     errors,

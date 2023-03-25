@@ -1,6 +1,5 @@
 import React from 'react'
-import LiverCirrhosis from '../components/LiverCirrhosis.Form'
-import Mesothelioma from '../components/Mesothelioma.Form'
+import Mesothelioma from '../components/forms/Mesothelioma.Form'
 
 const MesotheliomaPage = () => {
 

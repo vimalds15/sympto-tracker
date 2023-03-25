@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useFormik } from "formik";
-import { mesotheliomaSchema } from "../schemas";
-import DiseaseService from "../api/disease/disease";
-import PredictModal from "./PredictModal";
+import { mesotheliomaSchema } from "../../schemas";
+import DiseaseService from "../../api/disease/disease";
+import PredictModal from "../PredictModal";
 
 const Mesothelioma = () => {
   const [predicted, setPredicted] = useState(false);

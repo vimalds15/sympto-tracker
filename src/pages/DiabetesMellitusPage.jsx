@@ -1,5 +1,5 @@
 import React from 'react'
-import DiabetesMellitus from '../components/DiabetesMellitus.Form'
+import DiabetesMellitus from '../components/forms/DiabetesMellitus.Form'
 
 const DiabetesMellitusPage = () => {
   return (

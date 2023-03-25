@@ -1,6 +1,6 @@
 import React from 'react'
 import { useFormik } from 'formik'
-import { liverCirrhosisSchema } from '../schemas'
+import { liverCirrhosisSchema } from '../../schemas'
 
 const onSubmit = (values, actions) => {
     console.log(values)

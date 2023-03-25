@@ -1,8 +1,8 @@
 import React from 'react'
 import {  createBrowserRouter, Route, Router, RouterProvider, Routes } from 'react-router-dom'
 import { routes } from './routes/routes'
-import Navbar from './components/Navbar'
-import Footer from './components/Footer'
+import Navbar from './components/layouts/Navbar'
+import Footer from './components/layouts/Footer'
 
 
 

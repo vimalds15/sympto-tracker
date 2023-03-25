@@ -2,8 +2,8 @@ import React, { useState } from 'react'
 import { useFormik } from 'formik'
 import {
   chronicKidneyDisease
-} from '../schemas'
-import DiseaseService from '../api/disease/disease'
+} from "../../schemas"
+import DiseaseService from '../../api/disease/disease'
 
 const ChronicKidneyDiease = () => {
   const [predicted, setPredicted] = useState(false)

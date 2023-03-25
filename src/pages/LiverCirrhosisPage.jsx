@@ -1,5 +1,5 @@
 import React from 'react'
-import LiverCirrhosis from '../components/LiverCirrhosis.Form'
+import LiverCirrhosis from '../components/forms/LiverCirrhosis.Form'
 
 const LiverCirrhosisPage = () => {
   return (

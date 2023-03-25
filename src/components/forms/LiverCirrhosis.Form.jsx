@@ -10,7 +10,6 @@ const LiverCirrhosis = () => {
 
   const onSubmit = async (values) => {
     const formData = Object.values(values);
-    console.log(formData);
     try {
       const prediction = await DiseaseService.predictLiverCirrhosis(formData);
       setPredicted(true);

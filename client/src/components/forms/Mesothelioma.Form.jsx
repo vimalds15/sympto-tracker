@@ -8,7 +8,7 @@ const Mesothelioma = () => {
   const [predicted, setPredicted] = useState(false);
   const [result, setResult] = useState(null);
 
-  const onSubmit = async (values,) => {
+  const onSubmit = async (values) => {
     const formData = Object.values(values);
     try {
       const prediction = await DiseaseService.predictMesothelioma(formData);
@@ -28,7 +28,7 @@ const Mesothelioma = () => {
     handleChange,
     handleSubmit,
     setFieldValue,
-    resetForm
+    resetForm,
   } = useFormik({
     initialValues: {
       age: "",
@@ -52,10 +52,10 @@ const Mesothelioma = () => {
   });
 
   const handleReset = () => {
-    resetForm({})
-    setPredicted(false)
-    setResult(null)
-  }
+    resetForm({});
+    setPredicted(false);
+    setResult(null);
+  };
 
   useEffect(() => {}, [predicted, result]);
 
@@ -63,8 +63,12 @@ const Mesothelioma = () => {
 
   return (
     <div className="w-full items-center justify-center">
+      <h1 className="text-lg font-bold text-gray-600 text-center mt-8">
+        Mesothelioma
+      </h1>
+
       <form onSubmit={handleSubmit}>
-        <div className="flex items-center justify-center  flex-col mt-10 py-4">
+        <div className="flex items-center justify-center  flex-col mt-6 py-4">
           <label htmlFor="age" className="font-semibold w-[90%] max-w-sm">
             Age
           </label>
@@ -540,28 +544,37 @@ const Mesothelioma = () => {
           )}
 
           <div>
-          <button
-            className="my-10 mr-4 border-2 border-black bg-black disabled:opacity-30 text-gray-100 py-4 px-4 rounded"
-            type="submit"
-            disabled={isSubmitting}
-          >
-            Predict
-          </button>
-          <button
-            className="my-10 border-2 border-black disabled:opacity-30 text-black font-semibold py-4 px-4 rounded"
-            onClick={handleReset}
-            type="reset"
-          >
-            Reset
-          </button>
-
+            <button
+              className="my-10 mr-4 border-2 border-black bg-black disabled:opacity-30 text-gray-100 py-4 px-4 rounded"
+              type="submit"
+              disabled={isSubmitting}
+            >
+              Predict
+            </button>
+            <button
+              className="my-10 border-2 border-black disabled:opacity-30 text-black font-semibold py-4 px-4 rounded"
+              onClick={handleReset}
+              type="reset"
+            >
+              Reset
+            </button>
           </div>
 
           {predicted &&
             (result === 1 ? (
-              <PredictModal text={1} visible={true} disease="Mesothelioma" reset={handleReset}  />
+              <PredictModal
+                text={1}
+                visible={true}
+                disease="Mesothelioma"
+                reset={handleReset}
+              />
             ) : (
-              <PredictModal text={0} visible={true} disease="Mesothelioma" reset={handleReset} />
+              <PredictModal
+                text={0}
+                visible={true}
+                disease="Mesothelioma"
+                reset={handleReset}
+              />
             ))}
         </div>
       </form>

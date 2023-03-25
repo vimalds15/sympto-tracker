@@ -152,7 +152,7 @@ const CoronaryHeartDisease = () => {
             Resting Blood Pressure (in mm Hg)
           </label>
           <input
-            type='text'
+            type='number'
             id='restingBloodPressure'
             className={`h-12 w-[90%] max-w-sm font-semi-bold px-4 border-2 border-gray-300 rounded-sm outline-none hover:shadow-xl transition-shadow ${
               errors.restingBloodPressure && touched.restingBloodPressure
@@ -162,6 +162,7 @@ const CoronaryHeartDisease = () => {
             value={values.restingBloodPressure}
             onChange={handleChange}
             onBlur={handleBlur}
+            step="0.01"
             placeholder='Eg: 20'
           />
           {errors.restingBloodPressure && touched.restingBloodPressure && (
@@ -177,7 +178,7 @@ const CoronaryHeartDisease = () => {
             Serum Cholestrol (in mg/dl)
           </label>
           <input
-            type='text'
+            type='number'
             id='serumCholestrol'
             className={`h-12 w-[90%] max-w-sm font-semi-bold px-4 border-2 border-gray-300 rounded-sm outline-none hover:shadow-xl transition-shadow ${
               errors.serumCholestrol && touched.serumCholestrol
@@ -187,6 +188,7 @@ const CoronaryHeartDisease = () => {
             value={values.serumCholestrol}
             onChange={handleChange}
             onBlur={handleBlur}
+            step="0.01"
             placeholder='Eg: 20'
           />
           {errors.serumCholestrol && touched.serumCholestrol && (
@@ -234,7 +236,7 @@ const CoronaryHeartDisease = () => {
             htmlFor='restingElectrographicResults'
             className='font-semibold w-[90%] max-w-sm mt-8'
           >
-            Chronic Disease
+            Resting ElectroGraphic Results
           </label>
           <select
             className={`h-12 w-[90%] max-w-sm font-semi-bold px-4 border-2 border-gray-300 rounded-sm outline-none hover:shadow-xl transition-shadow ${
@@ -280,7 +282,7 @@ const CoronaryHeartDisease = () => {
             Maximum Heart Rate Acheived
           </label>
           <input
-            type='text'
+            type='number'
             id='maximumHeartRateAchieved'
             className={`h-12 w-[90%] max-w-sm font-semi-bold px-4 border-2 border-gray-300 rounded-sm outline-none hover:shadow-xl transition-shadow ${
               errors.maximumHeartRateAchieved &&
@@ -291,6 +293,7 @@ const CoronaryHeartDisease = () => {
             value={values.maximumHeartRateAchieved}
             onChange={handleChange}
             onBlur={handleBlur}
+            step="0.01"
             placeholder='Eg: 20'
           />
           {errors.maximumHeartRateAchieved &&
@@ -342,7 +345,7 @@ const CoronaryHeartDisease = () => {
             OldPeak (ST Depression Induced by exercise relative to rest)
           </label>
           <input
-            type='text'
+            type='number'
             id='oldPeak'
             className={`h-12 w-[90%] max-w-sm font-semi-bold px-4 border-2 border-gray-300 rounded-sm outline-none hover:shadow-xl transition-shadow ${
               errors.oldPeak && touched.oldPeak ? 'border-red-500' : ''
@@ -350,6 +353,7 @@ const CoronaryHeartDisease = () => {
             value={values.oldPeak}
             onChange={handleChange}
             onBlur={handleBlur}
+            step="0.01"
             placeholder='Eg: 20'
           />
           {errors.oldPeak && touched.oldPeak && (
@@ -365,7 +369,7 @@ const CoronaryHeartDisease = () => {
             Slope of the Peak Exercise ST segment
           </label>
           <input
-            type='text'
+            type='number'
             id='slopeOfPeakExercise'
             className={`h-12 w-[90%] max-w-sm font-semi-bold px-4 border-2 border-gray-300 rounded-sm outline-none hover:shadow-xl transition-shadow ${
               errors.slopeOfThePeakExercise && touched.slopeOfThePeakExercise
@@ -375,6 +379,7 @@ const CoronaryHeartDisease = () => {
             value={values.slopeOfPeakExercise}
             onChange={handleChange}
             onBlur={handleBlur}
+            step="0.01"
             placeholder='Eg: 20'
           />
           {errors.slopeOfPeakExercise && touched.slopeOfPeakExercise && (

@@ -1,10 +1,9 @@
 import React, { useState } from 'react'
 import { useFormik } from 'formik'
 import {
-  chronicKidneyDisease,
-  coronaryHeartDisease,
-  mesotheliomaSchema,
+  chronicKidneyDisease
 } from '../schemas'
+import DiseaseService from '../api/disease/disease'
 
 const ChronicKidneyDiease = () => {
   const [predicted, setPredicted] = useState(false)
@@ -13,14 +12,14 @@ const ChronicKidneyDiease = () => {
   const onSubmit = async (values, actions) => {
     const formData = Object.values(values)
     console.log(formData)
-    // try {
-    //   const prediction = await DiseaseService.predictMesothelioma(formData);
-    //   setPredicted(true);
-    //   setResult(prediction);
-    //   console.log(prediction);
-    // } catch (error) {
-    //   console.error(error.message);
-    // }
+    try {
+      const prediction = await DiseaseService.predictChronicKidneyDisease(formData);
+      setPredicted(true);
+      setResult(prediction);
+      console.log(prediction);
+    } catch (error) {
+      console.error(error.message);
+    }
   }
   const {
     values,

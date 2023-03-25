@@ -18,7 +18,7 @@ def home():
 @cross_origin()
 def predictMesothelioma():
     # return "API is working"
-    model = joblib.load('./models/mesothelioma')
+    model = joblib.load('./server/models/mesothelioma')
     data = request.get_json(force=True)
     data = np.array(data).reshape(1,-1)
     prediction = model.predict(data)
@@ -29,7 +29,7 @@ def predictMesothelioma():
 @app.route('/predict/chronickidneydisease',methods=['POST'])
 @cross_origin()
 def predictCKD():
-    model = joblib.load('./models/chronic-kidney-disease')
+    model = joblib.load('./server/models/chronic-kidney-disease')
     data = request.get_json(force=True)
     data = np.array(data).reshape(1,-1)
     prediction = model.predict(data)
@@ -39,7 +39,7 @@ def predictCKD():
 @app.route('/predict/coronaryheartdisease',methods=['POST'])
 @cross_origin()
 def predictCHD():
-    model = joblib.load('./models/coronary_heart_disease')
+    model = joblib.load('./server/models/coronary_heart_disease')
     data = request.get_json(force=True)
     data = np.array(data).reshape(1,-1)
     prediction = model.predict(data)
@@ -49,8 +49,8 @@ def predictCHD():
 @app.route('/predict/diabetesmelitus',methods=['POST'])
 @cross_origin()
 def predictDM():
-    scaler = joblib.load('./models/Diabetes_scaler')
-    model = joblib.load('./models/Diabetes-Melitus')
+    scaler = joblib.load('./server/models/Diabetes_scaler')
+    model = joblib.load('./server/models/Diabetes-Melitus')
     data = request.get_json(force=True)
     data = np.array(data).reshape(1,-1)
     prediction = model.predict(scaler.transform(data))
@@ -60,7 +60,7 @@ def predictDM():
 @app.route('/predict/livercirrhosis',methods=['POST'])
 @cross_origin()
 def predictLiverCirrhosis():
-    model = joblib.load('./models/Liver-Cirrhosis')
+    model = joblib.load('./server/models/Liver-Cirrhosis')
     data = request.get_json(force=True)
     data = np.array(data).reshape(1,-1)
     prediction = model.predict(data)

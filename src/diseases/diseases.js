@@ -3,10 +3,10 @@ export const diseases = [
         id:1,
         name:"MESOTHELIOMA"
     },
-    {
-        id:2,
-        name:"LIVER CIRRHOSIS"
-    },
+    // {
+    //     id:2,
+    //     name:"LIVER CIRRHOSIS"
+    // },
     {
         id:3,
         name:"CHRONIC KIDNEY DISEASE"

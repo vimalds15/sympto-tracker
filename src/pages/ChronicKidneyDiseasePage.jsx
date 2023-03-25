@@ -3,7 +3,7 @@ import ChronicKidneyDiease from '../components/ChronicKidneyDisease.Form'
 
 const ChronicKidneyDiseasePage = () => {
   return (
-    <div className='flex items-center justify-center'>
+    <div className='flex items-center justify-center w-full'>
         <ChronicKidneyDiease />
     </div>
   )

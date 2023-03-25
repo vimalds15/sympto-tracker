@@ -3,7 +3,7 @@ import CoronaryHeartDisease from '../components/CoronaryHeartDisease.Form'
 
 const CoronaryHeartDiseasePage = () => {
   return (
-    <div className='flex items-center justify-center'>
+    <div className='flex items-center justify-center w-full'>
         <CoronaryHeartDisease />
     </div>
   )

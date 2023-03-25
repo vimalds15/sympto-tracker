@@ -6,15 +6,20 @@ import Footer from './components/Footer'
 
 
 
-const route = createBrowserRouter(routes)
 
 const App = () => {
   return (
-    <>
+    <div className='flex flex-col min-h-screen'>
       <Navbar />
-      <RouterProvider router={route} />
+      <div className='flex flex-grow w-full'>
+      <Routes>
+        {routes.map(route => 
+          <Route key={route.path} path={route.path} element={route.element}  />  
+        )}
+      </Routes>
+      </div>
       <Footer />
-    </>
+    </div>
   )
 }
 

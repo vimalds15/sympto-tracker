@@ -4,7 +4,7 @@ import { diseases } from '../diseases/diseases'
 
 const HomeScreen = () => {
   return (
-    <div className='flex flex-col bg-[#ebebeb] items-center justify-center py-10'>
+    <div className='flex flex-col flex-grow items-center justify-center py-10 bg-[#ebebeb]'>
       {diseases.map(disease=>( 
           <DiseaseCard key={disease.id} id={disease.id} name={disease.name} />
       ))}  

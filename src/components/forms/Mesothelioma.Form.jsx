@@ -10,7 +10,6 @@ const Mesothelioma = () => {
 
   const onSubmit = async (values,) => {
     const formData = Object.values(values);
-    console.log(formData);
     try {
       const prediction = await DiseaseService.predictMesothelioma(formData);
       setPredicted(true);

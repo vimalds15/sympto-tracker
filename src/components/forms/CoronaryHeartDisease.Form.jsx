@@ -10,7 +10,6 @@ const CoronaryHeartDisease = () => {
 
   const onSubmit = async (values, actions) => {
     const formData = Object.values(values);
-    console.log(formData);
     try {
       const prediction = await DiseaseService.predictCoronaryHeartDisease(
         formData

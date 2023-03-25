@@ -1,24 +1,26 @@
-import React, { useState } from 'react'
-import { useFormik } from 'formik'
-import { coronaryHeartDisease } from '../../schemas'
-import DiseaseService from '../../api/disease/disease'
+import React, { useState, useEffect } from "react";
+import { useFormik } from "formik";
+import { coronaryHeartDisease } from "../../schemas";
+import DiseaseService from "../../api/disease/disease";
+import PredictModal from "../PredictModal";
 
 const CoronaryHeartDisease = () => {
-  const [predicted, setPredicted] = useState(false)
-  const [result, setResult] = useState(null)
+  const [predicted, setPredicted] = useState(false);
+  const [result, setResult] = useState(null);
 
   const onSubmit = async (values, actions) => {
-    const formData = Object.values(values)
-    console.log(formData)
+    const formData = Object.values(values);
+    console.log(formData);
     try {
-      const prediction = await DiseaseService.predictCoronaryHeartDisease(formData)
-      setPredicted(true)
-      setResult(prediction)
-      console.log(prediction)
+      const prediction = await DiseaseService.predictCoronaryHeartDisease(
+        formData
+      );
+      setPredicted(true);
+      setResult(prediction);
     } catch (error) {
-      console.error(error.message)
+      console.error(error.message);
     }
-  }
+  };
 
   const {
     values,
@@ -29,84 +31,93 @@ const CoronaryHeartDisease = () => {
     handleChange,
     handleSubmit,
     setFieldValue,
+    resetForm,
   } = useFormik({
     initialValues: {
-      age: '',
-      gender: '',
-      chestPainType: '',
-      restingBloodPressure: '',
-      serumCholestrol: '',
-      fastingBloodSugar: '',
-      restingElectrographicResults: '',
-      maximumHeartRateAchieved: '',
-      exerciseInducedAngina: '',
-      oldPeak: '',
-      slopeOfPeakExercise: '',
-      numberOfMajorVessels: '',
+      age: "",
+      gender: "",
+      chestPainType: "",
+      restingBloodPressure: "",
+      serumCholestrol: "",
+      fastingBloodSugar: "",
+      restingElectrographicResults: "",
+      maximumHeartRateAchieved: "",
+      exerciseInducedAngina: "",
+      oldPeak: "",
+      slopeOfPeakExercise: "",
+      numberOfMajorVessels: "",
     },
     validationSchema: coronaryHeartDisease,
     onSubmit,
-  })
+  });
 
-  console.log(errors)
+  const handleReset = () => {
+    resetForm({});
+    setPredicted(false);
+    setResult(null);
+  };
+
+  useEffect(() => {}, [predicted, result]);
+
+  console.log(errors);
 
   return (
-    <div className='w-full items-center justify-center'>
+    <div className="w-full items-center justify-center">
       <form onSubmit={handleSubmit}>
-        <div className='flex items-center justify-center  flex-col mt-10 py-4'>
-          <label htmlFor='age' className='font-semibold w-[90%] max-w-sm'>
+        <div className="flex items-center justify-center  flex-col mt-10 py-4">
+          <label htmlFor="age" className="font-semibold w-[90%] max-w-sm">
             Age
           </label>
           <input
-            type='number'
-            id='age'
+            type="number"
+            id="age"
             className={`h-12 w-[90%] max-w-sm font-semi-bold px-4 border-2 border-gray-300 rounded-sm outline-none hover:shadow-xl transition-shadow ${
-              errors.age && touched.age ? 'border-red-500' : ''
+              errors.age && touched.age ? "border-red-500" : ""
             }`}
             value={values.age}
             onChange={handleChange}
             onBlur={handleBlur}
-            placeholder='Eg: 18'
+            placeholder="Eg: 18"
           />
           {errors.age && touched.age && (
-            <p className='w-[90%] max-w-sm font-medium text-red-500'>
+            <p className="w-[90%] max-w-sm font-medium text-red-500">
               {errors.age}
             </p>
           )}
 
           <label
-            htmlFor='gender'
-            className='font-semibold w-[90%] max-w-sm mt-8'
+            htmlFor="gender"
+            className="font-semibold w-[90%] max-w-sm mt-8"
           >
             Gender
           </label>
           <select
             className={`h-12 w-[90%] max-w-sm font-semi-bold px-4 border-2 border-gray-300 rounded-sm outline-none hover:shadow-xl transition-shadow ${
-              errors.gender && touched.gender ? 'border-red-600' : ''
+              errors.gender && touched.gender ? "border-red-600" : ""
             }`}
-            id='gender'
+            id="gender"
             value={values.gender}
-            onChange={(e) => setFieldValue('gender', Number(e.target.value))}
+            onChange={(e) => setFieldValue("gender", Number(e.target.value))}
           >
-            <option value='' label='Select an option'>
+            <option value="" label="Select an option">
               --select an option--
             </option>
-            <option value={1} label='Male'>
+            <option value={1} label="Male">
               Male
             </option>
-            <option value={0} label='Female'>
+            <option value={0} label="Female">
               Female
             </option>
           </select>
           {errors.gender && touched.gender && (
-            <p className='w-[90%] max-w-sm font-medium text-red-500'>
+            <p className="w-[90%] max-w-sm font-medium text-red-500">
               {errors.gender}
             </p>
           )}
 
           <label
-            htmlFor='chestPainType'
-            className='font-semibold w-[90%] max-w-sm mt-8'
+            htmlFor="chestPainType"
+            className="font-semibold w-[90%] max-w-sm mt-8"
           >
             Chest Pain Type
           </label>
@@ -114,127 +125,127 @@ const CoronaryHeartDisease = () => {
           <select
             className={`h-12 w-[90%] max-w-sm font-semi-bold px-4 border-2 border-gray-300 rounded-sm outline-none hover:shadow-xl transition-shadow ${
               errors.chestPainType && touched.chestPainType
-                ? 'border-red-600'
-                : ''
+                ? "border-red-600"
+                : ""
             }`}
-            id='chestPainType'
+            id="chestPainType"
             value={values.chestPainType}
             onChange={(e) =>
-              setFieldValue('chestPainType', Number(e.target.value))
+              setFieldValue("chestPainType", Number(e.target.value))
             }
           >
-            <option value='' label='Select an option'>
+            <option value="" label="Select an option">
               --select an option--
             </option>
-            <option value={0} label='Typical Angina'>
+            <option value={0} label="Typical Angina">
               Typical Angina
             </option>
-            <option value={1} label='Atypical Angina'>
+            <option value={1} label="Atypical Angina">
               Atypical Angina
             </option>
-            <option value={2} label='Non-Anginal'>
+            <option value={2} label="Non-Anginal">
               Non-Anginal
             </option>
-            <option value={3} label='Asymptomatic'>
+            <option value={3} label="Asymptomatic">
               Asymptomatic
             </option>
           </select>
           {errors.chestPainType && touched.chestPainType && (
-            <p className='w-[90%] max-w-sm font-medium text-red-500'>
+            <p className="w-[90%] max-w-sm font-medium text-red-500">
               {errors.chestPainType}
             </p>
           )}
 
           <label
-            htmlFor='restingBloodPressure'
-            className='font-semibold w-[90%] max-w-sm mt-8'
+            htmlFor="restingBloodPressure"
+            className="font-semibold w-[90%] max-w-sm mt-8"
           >
             Resting Blood Pressure (in mm Hg)
           </label>
           <input
-            type='number'
-            id='restingBloodPressure'
+            type="number"
+            id="restingBloodPressure"
             className={`h-12 w-[90%] max-w-sm font-semi-bold px-4 border-2 border-gray-300 rounded-sm outline-none hover:shadow-xl transition-shadow ${
               errors.restingBloodPressure && touched.restingBloodPressure
-                ? 'border-red-500'
-                : ''
+                ? "border-red-500"
+                : ""
             }`}
             value={values.restingBloodPressure}
             onChange={handleChange}
             onBlur={handleBlur}
             step="0.01"
-            placeholder='Eg: 20'
+            placeholder="Eg: 20"
           />
           {errors.restingBloodPressure && touched.restingBloodPressure && (
-            <p className='w-[90%] max-w-sm font-medium text-red-500'>
+            <p className="w-[90%] max-w-sm font-medium text-red-500">
               {errors.restingBloodPressure}
             </p>
           )}
 
           <label
-            htmlFor='serumCholestrol'
-            className='font-semibold w-[90%] max-w-sm mt-8'
+            htmlFor="serumCholestrol"
+            className="font-semibold w-[90%] max-w-sm mt-8"
           >
             Serum Cholestrol (in mg/dl)
           </label>
           <input
-            type='number'
-            id='serumCholestrol'
+            type="number"
+            id="serumCholestrol"
             className={`h-12 w-[90%] max-w-sm font-semi-bold px-4 border-2 border-gray-300 rounded-sm outline-none hover:shadow-xl transition-shadow ${
               errors.serumCholestrol && touched.serumCholestrol
-                ? 'border-red-500'
-                : ''
+                ? "border-red-500"
+                : ""
             }`}
             value={values.serumCholestrol}
             onChange={handleChange}
             onBlur={handleBlur}
             step="0.01"
-            placeholder='Eg: 20'
+            placeholder="Eg: 20"
           />
           {errors.serumCholestrol && touched.serumCholestrol && (
-            <p className='w-[90%] max-w-sm font-medium text-red-500'>
+            <p className="w-[90%] max-w-sm font-medium text-red-500">
               {errors.serumCholestrol}
             </p>
           )}
 
           <label
-            htmlFor='fastingBloodSugar'
-            className='font-semibold w-[90%] max-w-sm mt-8'
+            htmlFor="fastingBloodSugar"
+            className="font-semibold w-[90%] max-w-sm mt-8"
           >
-            Is Fasting Bloog Sugar is greater than 120mg/dl{' '}
+            Is Fasting Bloog Sugar is greater than 120mg/dl{" "}
           </label>
           <select
             className={`h-12 w-[90%] max-w-sm font-semi-bold px-4 border-2 border-gray-300 rounded-sm outline-none hover:shadow-xl transition-shadow ${
               errors.fastingBloodSugar && touched.fastingBloodSugar
-                ? 'border-red-600'
-                : ''
+                ? "border-red-600"
+                : ""
             }`}
-            id='fastingBloodSugar'
+            id="fastingBloodSugar"
             value={values.fastingBloodSugar}
-            placeholder='Eg: Male'
+            placeholder="Eg: Male"
             onChange={(e) =>
-              setFieldValue('fastingBloodSugar', Number(e.target.value))
+              setFieldValue("fastingBloodSugar", Number(e.target.value))
             }
           >
-            <option value='' label='Select an option'>
+            <option value="" label="Select an option">
               --select an option--
             </option>
-            <option value={1} label='Yes'>
+            <option value={1} label="Yes">
               Yes
             </option>
-            <option value={0} label='No'>
+            <option value={0} label="No">
               No
             </option>
           </select>
           {errors.fastingBloodSugar && touched.fastingBloodSugar && (
-            <p className='w-[90%] max-w-sm font-medium text-red-500'>
+            <p className="w-[90%] max-w-sm font-medium text-red-500">
               {errors.fastingBloodSugar}
             </p>
           )}
 
           <label
-            htmlFor='restingElectrographicResults'
-            className='font-semibold w-[90%] max-w-sm mt-8'
+            htmlFor="restingElectrographicResults"
+            className="font-semibold w-[90%] max-w-sm mt-8"
           >
             Resting ElectroGraphic Results
           </label>
@@ -242,210 +253,229 @@ const CoronaryHeartDisease = () => {
             className={`h-12 w-[90%] max-w-sm font-semi-bold px-4 border-2 border-gray-300 rounded-sm outline-none hover:shadow-xl transition-shadow ${
               errors.restingElectrographicResults &&
               touched.restingElectrographicResults
-                ? 'border-red-600'
-                : ''
+                ? "border-red-600"
+                : ""
             }`}
-            id='restingElectrographicResults'
+            id="restingElectrographicResults"
             value={values.restingElectrographicResults}
-            placeholder='Eg: Male'
+            placeholder="Eg: Male"
             onChange={(e) =>
               setFieldValue(
-                'restingElectrographicResults',
+                "restingElectrographicResults",
                 Number(e.target.value)
               )
             }
           >
-            <option value='' label='Select an option'>
+            <option value="" label="Select an option">
               --select an option--
             </option>
-            <option value={0} label='Normal'>
+            <option value={0} label="Normal">
               Normal
             </option>
-            <option value={1} label='STT Abnormality'>
+            <option value={1} label="STT Abnormality">
               STT Abnormality
             </option>
-            <option value={2} label='LV Hypertrophy'>
+            <option value={2} label="LV Hypertrophy">
               LV Hypertrophy
             </option>
           </select>
           {errors.restingElectrographicResults &&
             touched.restingElectrographicResults && (
-              <p className='w-[90%] max-w-sm font-medium text-red-500'>
+              <p className="w-[90%] max-w-sm font-medium text-red-500">
                 {errors.restingElectrographicResults}
               </p>
             )}
 
           <label
-            htmlFor='maximumHeartRateAchieved'
-            className='font-semibold w-[90%] max-w-sm mt-8'
+            htmlFor="maximumHeartRateAchieved"
+            className="font-semibold w-[90%] max-w-sm mt-8"
           >
             Maximum Heart Rate Acheived
           </label>
           <input
-            type='number'
-            id='maximumHeartRateAchieved'
+            type="number"
+            id="maximumHeartRateAchieved"
             className={`h-12 w-[90%] max-w-sm font-semi-bold px-4 border-2 border-gray-300 rounded-sm outline-none hover:shadow-xl transition-shadow ${
               errors.maximumHeartRateAchieved &&
               touched.maximumHeartRateAchieved
-                ? 'border-red-500'
-                : ''
+                ? "border-red-500"
+                : ""
             }`}
             value={values.maximumHeartRateAchieved}
             onChange={handleChange}
             onBlur={handleBlur}
             step="0.01"
-            placeholder='Eg: 20'
+            placeholder="Eg: 20"
           />
           {errors.maximumHeartRateAchieved &&
             touched.maximumHeartRateAchieved && (
-              <p className='w-[90%] max-w-sm font-medium text-red-500'>
+              <p className="w-[90%] max-w-sm font-medium text-red-500">
                 {errors.maximumHeartRateAchieved}
               </p>
             )}
 
           <label
-            htmlFor='exerciseInducedAngina'
-            className='font-semibold w-[90%] max-w-sm mt-8'
+            htmlFor="exerciseInducedAngina"
+            className="font-semibold w-[90%] max-w-sm mt-8"
           >
             Exercise-Induced Angina
           </label>
           <select
             className={`h-12 w-[90%] max-w-sm font-semi-bold px-4 border-2 border-gray-300 rounded-sm outline-none hover:shadow-xl transition-shadow ${
               errors.exerciseInducedAngina && touched.exerciseInducedAngina
-                ? 'border-red-600'
-                : ''
+                ? "border-red-600"
+                : ""
             }`}
-            id='exerciseInducedAngina'
+            id="exerciseInducedAngina"
             value={values.exerciseInducedAngina}
-            placeholder='Eg: Male'
+            placeholder="Eg: Male"
             onChange={(e) =>
-              setFieldValue('exerciseInducedAngina', Number(e.target.value))
+              setFieldValue("exerciseInducedAngina", Number(e.target.value))
             }
           >
-            <option value='' label='Select an option'>
+            <option value="" label="Select an option">
               --select an option--
             </option>
-            <option value={1} label='Yes'>
+            <option value={1} label="Yes">
               Yes
             </option>
-            <option value={0} label='No'>
+            <option value={0} label="No">
               No
             </option>
           </select>
           {errors.exerciseInducedAngina && touched.exerciseInducedAngina && (
-            <p className='w-[90%] max-w-sm font-medium text-red-500'>
+            <p className="w-[90%] max-w-sm font-medium text-red-500">
               {errors.exerciseInducedAngina}
             </p>
           )}
 
           <label
-            htmlFor='oldPeak'
-            className='font-semibold w-[90%] max-w-sm mt-8'
+            htmlFor="oldPeak"
+            className="font-semibold w-[90%] max-w-sm mt-8"
           >
             OldPeak (ST Depression Induced by exercise relative to rest)
           </label>
           <input
-            type='number'
-            id='oldPeak'
+            type="number"
+            id="oldPeak"
             className={`h-12 w-[90%] max-w-sm font-semi-bold px-4 border-2 border-gray-300 rounded-sm outline-none hover:shadow-xl transition-shadow ${
-              errors.oldPeak && touched.oldPeak ? 'border-red-500' : ''
+              errors.oldPeak && touched.oldPeak ? "border-red-500" : ""
             }`}
             value={values.oldPeak}
             onChange={handleChange}
             onBlur={handleBlur}
             step="0.01"
-            placeholder='Eg: 20'
+            placeholder="Eg: 20"
           />
           {errors.oldPeak && touched.oldPeak && (
-            <p className='w-[90%] max-w-sm font-medium text-red-500'>
+            <p className="w-[90%] max-w-sm font-medium text-red-500">
               {errors.oldPeak}
             </p>
           )}
 
           <label
-            htmlFor='slopeOfPeakExercise'
-            className='font-semibold w-[90%] max-w-sm mt-8'
+            htmlFor="slopeOfPeakExercise"
+            className="font-semibold w-[90%] max-w-sm mt-8"
           >
             Slope of the Peak Exercise ST segment
           </label>
           <input
-            type='number'
-            id='slopeOfPeakExercise'
+            type="number"
+            id="slopeOfPeakExercise"
             className={`h-12 w-[90%] max-w-sm font-semi-bold px-4 border-2 border-gray-300 rounded-sm outline-none hover:shadow-xl transition-shadow ${
               errors.slopeOfThePeakExercise && touched.slopeOfThePeakExercise
-                ? 'border-red-500'
-                : ''
+                ? "border-red-500"
+                : ""
             }`}
             value={values.slopeOfPeakExercise}
             onChange={handleChange}
             onBlur={handleBlur}
             step="0.01"
-            placeholder='Eg: 20'
+            placeholder="Eg: 20"
           />
           {errors.slopeOfPeakExercise && touched.slopeOfPeakExercise && (
-            <p className='w-[90%] max-w-sm font-medium text-red-500'>
+            <p className="w-[90%] max-w-sm font-medium text-red-500">
               {errors.slopeOfPeakExercise}
             </p>
           )}
 
           <label
-            htmlFor='numberOfMajorVessels'
-            className='font-semibold w-[90%] max-w-sm mt-8'
+            htmlFor="numberOfMajorVessels"
+            className="font-semibold w-[90%] max-w-sm mt-8"
           >
             Number of the Major Vessels
           </label>
           <select
             className={`h-12 w-[90%] max-w-sm font-semi-bold px-4 border-2 border-gray-300 rounded-sm outline-none hover:shadow-xl transition-shadow ${
               errors.numberOfMajorVessels && touched.numberOfMajorVessels
-                ? 'border-red-600'
-                : ''
+                ? "border-red-600"
+                : ""
             }`}
-            id='numberOfMajorVessels'
+            id="numberOfMajorVessels"
             value={values.numberOfMajorVessels}
-            placeholder='Eg: Male'
+            placeholder="Eg: Male"
             onChange={(e) =>
-              setFieldValue('numberOfMajorVessels', Number(e.target.value))
+              setFieldValue("numberOfMajorVessels", Number(e.target.value))
             }
           >
-            <option value='' label='Select an option'>
+            <option value="" label="Select an option">
               --select an option--
             </option>
-            <option value={0} label='0'>
+            <option value={0} label="0">
               0
             </option>
-            <option value={1} label='1'>
+            <option value={1} label="1">
               1
             </option>
-            <option value={2} label='2'>
+            <option value={2} label="2">
               2
             </option>
-            <option value={3} label='3'>
+            <option value={3} label="3">
               3
             </option>
           </select>
           {errors.numberOfMajorVessels && touched.numberOfMajorVessels && (
-            <p className='w-[90%] max-w-sm font-medium text-red-500'>
+            <p className="w-[90%] max-w-sm font-medium text-red-500">
               {errors.numberOfMajorVessels}
             </p>
           )}
 
-          <button
-            disabled={isSubmitting}
-            className='my-10 bg-black disabled:opacity-30 text-gray-100 py-4 px-4 rounded'
-            type='submit'
-          >
-            Predict
-          </button>
+          <div>
+            <button
+              className="my-10 mr-4 border-2 border-black bg-black disabled:opacity-30 text-gray-100 py-4 px-4 rounded"
+              type="submit"
+              disabled={isSubmitting}
+            >
+              Predict
+            </button>
+            <button
+              className="my-10 border-2 border-black disabled:opacity-30 text-black font-semibold py-4 px-4 rounded"
+              onClick={handleReset}
+              type="reset"
+            >
+              Reset
+            </button>
+          </div>
           {predicted &&
             (result === 1 ? (
-              <p>Yes, you have this disease</p>
+              <PredictModal
+                text={1}
+                visible={true}
+                disease="Coronary Heart Disease"
+                reset={handleReset}
+              />
             ) : (
-              <p>No, you dont have this disease</p>
+              <PredictModal
+                text={0}
+                visible={true}
+                disease="Coronary Heart Disease"
+                reset={handleReset}
+              />
             ))}
         </div>
       </form>
     </div>
-  )
-}
+  );
+};
 
-export default CoronaryHeartDisease
+export default CoronaryHeartDisease;

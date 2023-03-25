@@ -1,9 +1,10 @@
-import React, { useState } from 'react'
+import React, { useState,useEffect } from 'react'
 import { useFormik } from 'formik'
 import {
   diabetesMellitus
 } from '../../schemas'
 import DiseaseService from '../../api/disease/disease'
+import PredictModal from '../PredictModal'
 
 const DiabetesMellitus = () => {
   const [predicted, setPredicted] = useState(false)
@@ -30,6 +31,7 @@ const DiabetesMellitus = () => {
     handleBlur,
     handleChange,
     handleSubmit,
+    resetForm
   } = useFormik({
     initialValues: {
       pregnancies: '',
@@ -45,7 +47,15 @@ const DiabetesMellitus = () => {
     onSubmit,
   })
 
-  console.log(errors)
+  const handleReset = () => {
+    resetForm({})
+    setPredicted(false)
+    setResult(null)
+  }
+
+  useEffect(() => {}, [predicted, result]);
+
+  console.log(errors);
 
   return (
     <div className='w-full items-center justify-center'>
@@ -252,19 +262,29 @@ const DiabetesMellitus = () => {
               </p>
             )}
 
+<div>
           <button
+            className="my-10 mr-4 border-2 border-black bg-black disabled:opacity-30 text-gray-100 py-4 px-4 rounded"
+            type="submit"
             disabled={isSubmitting}
-            className='my-10 bg-black disabled:opacity-30 text-gray-100 py-4 px-4 rounded'
-            type='submit'
           >
             Predict
           </button>
+          <button
+            className="my-10 border-2 border-black disabled:opacity-30 text-black font-semibold py-4 px-4 rounded"
+            onClick={handleReset}
+            type="reset"
+          >
+            Reset
+          </button>
+
+          </div>
 
           {predicted &&
             (result === 1 ? (
-              <p>Yes, you have this disease</p>
+              <PredictModal text={1} visible={true} disease="Diabetes Melitus" reset={handleReset}  />
             ) : (
-              <p>No, you dont have this disease</p>
+              <PredictModal text={0} visible={true} disease="Diabetes Melitus" reset={handleReset} />
             ))}
         </div>
       </form>

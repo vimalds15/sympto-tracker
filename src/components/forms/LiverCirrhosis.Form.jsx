@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useFormik } from "formik";
 import { liverCirrhosisSchema } from "../../schemas";
+import DiseaseService from "../../api/disease/disease";
+import PredictModal from "../PredictModal";
 
 const LiverCirrhosis = () => {
   const [predicted, setPredicted] = useState(false);
@@ -10,7 +12,7 @@ const LiverCirrhosis = () => {
     const formData = Object.values(values);
     console.log(formData);
     try {
-      const prediction = await DiseaseService.predictMesothelioma(formData);
+      const prediction = await DiseaseService.predictLiverCirrhosis(formData);
       setPredicted(true);
       setResult(prediction);
     } catch (error) {
@@ -27,12 +29,11 @@ const LiverCirrhosis = () => {
     handleChange,
     handleSubmit,
     setFieldValue,
-    resetForm
+    resetForm,
   } = useFormik({
     initialValues: {
       age: "",
       gender: "",
-      drug: "",
       presenceOfAscites: "",
       presenceOfHepatomegaly: "",
       presenceOfSpiders: "",
@@ -40,6 +41,8 @@ const LiverCirrhosis = () => {
       serumBilirubin: "",
       serumCholesterol: "",
       albumin: "",
+      urineCopper: "",
+      alkalinePhosphate: "",
       sgot: "",
       triglycerides: "",
       plateletsPerCubic: "",
@@ -50,10 +53,10 @@ const LiverCirrhosis = () => {
   });
 
   const handleReset = () => {
-    resetForm({})
-    setPredicted(false)
-    setResult(null)
-  }
+    resetForm({});
+    setPredicted(false);
+    setResult(null);
+  };
 
   useEffect(() => {}, [predicted, result]);
 
@@ -113,424 +116,407 @@ const LiverCirrhosis = () => {
             </p>
           )}
 
-          <label htmlFor="drug" className="font-semibold w-[90%] max-w-sm mt-8">
-            Drug
-          </label>
-
-          <select
-            className={`h-12 w-[90%] max-w-sm font-semi-bold px-4 border-2 border-gray-300 rounded-sm outline-none hover:shadow-xl transition-shadow ${
-              errors.drug && touched.drug ? "border-red-600" : ""
-            }`}
-            id="drug"
-            value={values.drug}
-            placeholder=""
-            onChange={handleChange}
-          >
-            <option value="" label="Select an option">
-              --select an option--
-            </option>
-            <option value="D-Penicillamine" label="D-Penicillamine">
-              D-Penicillamine
-            </option>
-            <option value="Placebo" label="Placebo">
-              Placebo
-            </option>
-          </select>
-          {errors.smoking && touched.smoking && (
-            <p className="w-[90%] max-w-sm font-medium text-red-500">
-              {errors.smoking}
-            </p>
-          )}
-
           <label
-            htmlFor="yellowFingers"
+            htmlFor="presenceOfAscites"
             className="font-semibold w-[90%] max-w-sm mt-8"
           >
-            Yellow Fingers
+            Presence of Ascites
           </label>
           <select
             className={`h-12 w-[90%] max-w-sm font-semi-bold px-4 border-2 border-gray-300 rounded-sm outline-none hover:shadow-xl transition-shadow ${
-              errors.yellowFingers && touched.yellowFingers
+              errors.presenceOfAscites && touched.presenceOfAscites
                 ? "border-red-600"
                 : ""
             }`}
-            id="yellowFingers"
-            value={values.yellowFingers}
-            placeholder="Eg: Male"
-            onChange={handleChange}
+            id="presenceOfAscites"
+            value={values.presenceOfAscites}
+            onChange={(e) =>
+              setFieldValue("presenceOfAscites", Number(e.target.value))
+            }
           >
             <option value="" label="Select an option">
               --select an option--
             </option>
-            <option value="yes" label="Yes">
+            <option value={1} label="Yes">
               Yes
             </option>
-            <option value="no" label="No">
+            <option value={0} label="No">
               No
             </option>
           </select>
-          {errors.yellowFingers && touched.yellowFingers && (
+          {errors.presenceOfAscites && touched.presenceOfAscites && (
             <p className="w-[90%] max-w-sm font-medium text-red-500">
-              {errors.yellowFingers}
+              {errors.presenceOfAscites}
             </p>
           )}
 
           <label
-            htmlFor="anxiety"
+            htmlFor="presenceOfHepatomegaly"
             className="font-semibold w-[90%] max-w-sm mt-8"
           >
-            Anxiety
+            Presence Of Hepatomegaly
           </label>
           <select
             className={`h-12 w-[90%] max-w-sm font-semi-bold px-4 border-2 border-gray-300 rounded-sm outline-none hover:shadow-xl transition-shadow ${
-              errors.anxiety && touched.anxiety ? "border-red-600" : ""
-            }`}
-            id="anxiety"
-            value={values.anxiety}
-            placeholder="Eg: Male"
-            onChange={handleChange}
-          >
-            <option value="" label="Select an option">
-              --select an option--
-            </option>
-            <option value="yes" label="Yes">
-              Yes
-            </option>
-            <option value="no" label="No">
-              No
-            </option>
-          </select>
-          {errors.anxiety && touched.anxiety && (
-            <p className="w-[90%] max-w-sm font-medium text-red-500">
-              {errors.anxiety}
-            </p>
-          )}
-
-          <label
-            htmlFor="peerPressure"
-            className="font-semibold w-[90%] max-w-sm mt-8"
-          >
-            Peer Pressure
-          </label>
-          <select
-            className={`h-12 w-[90%] max-w-sm font-semi-bold px-4 border-2 border-gray-300 rounded-sm outline-none hover:shadow-xl transition-shadow ${
-              errors.peerPressure && touched.peerPressure
+              errors.presenceOfHepatomegaly && touched.presenceOfHepatomegaly
                 ? "border-red-600"
                 : ""
             }`}
-            id="peerPressure"
-            value={values.peerPressure}
-            placeholder="Eg: Male"
-            onChange={handleChange}
+            id="presenceOfHepatomegaly"
+            value={values.presenceOfHepatomegaly}
+            onChange={(e) =>
+              setFieldValue("presenceOfHepatomegaly", Number(e.target.value))
+            }
           >
             <option value="" label="Select an option">
               --select an option--
             </option>
-            <option value="yes" label="Yes">
+            <option value={1} label="Yes">
               Yes
             </option>
-            <option value="no" label="No">
+            <option value={0} label="No">
               No
             </option>
           </select>
-          {errors.peerPressure && touched.peerPressure && (
+          {errors.presenceOfHepatomegaly && touched.presenceOfHepatomegaly && (
             <p className="w-[90%] max-w-sm font-medium text-red-500">
-              {errors.peerPressure}
+              {errors.presenceOfHepatomegaly}
             </p>
           )}
 
           <label
-            htmlFor="chronicDisease"
+            htmlFor="presenceOfSpiders"
             className="font-semibold w-[90%] max-w-sm mt-8"
           >
-            Chronic Disease
+            Presence of Spiders
           </label>
           <select
             className={`h-12 w-[90%] max-w-sm font-semi-bold px-4 border-2 border-gray-300 rounded-sm outline-none hover:shadow-xl transition-shadow ${
-              errors.chronicDisease && touched.chronicDisease
+              errors.presenceOfSpiders && touched.presenceOfSpiders
                 ? "border-red-600"
                 : ""
             }`}
-            id="chronicDisease"
-            value={values.chronicDisease}
-            placeholder="Eg: Male"
-            onChange={handleChange}
+            id="presenceOfSpiders"
+            value={values.presenceOfSpiders}
+            onChange={(e) =>
+              setFieldValue("presenceOfSpiders", Number(e.target.value))
+            }
           >
             <option value="" label="Select an option">
               --select an option--
             </option>
-            <option value="yes" label="Yes">
+            <option value={1} label="Yes">
               Yes
             </option>
-            <option value="no" label="No">
+            <option value={0} label="No">
               No
             </option>
           </select>
-          {errors.chronicDisease && touched.chronicDisease && (
+          {errors.presenceOfSpiders && touched.presenceOfSpiders && (
             <p className="w-[90%] max-w-sm font-medium text-red-500">
-              {errors.chronicDisease}
+              {errors.presenceOfSpiders}
             </p>
           )}
 
           <label
-            htmlFor="fatigue"
+            htmlFor="presenceOfEdema"
             className="font-semibold w-[90%] max-w-sm mt-8"
           >
-            Fatigue
+            Presence Of Edema
           </label>
           <select
             className={`h-12 w-[90%] max-w-sm font-semi-bold px-4 border-2 border-gray-300 rounded-sm outline-none hover:shadow-xl transition-shadow ${
-              errors.fatigue && touched.fatigue ? "border-red-600" : ""
-            }`}
-            id="fatigue"
-            value={values.fatigue}
-            placeholder="Eg: Male"
-            onChange={handleChange}
-          >
-            <option value="" label="Select an option">
-              --select an option--
-            </option>
-            <option value="yes" label="Yes">
-              Yes
-            </option>
-            <option value="no" label="No">
-              No
-            </option>
-          </select>
-          {errors.fatigue && touched.fatigue && (
-            <p className="w-[90%] max-w-sm font-medium text-red-500">
-              {errors.fatigue}
-            </p>
-          )}
-
-          <label
-            htmlFor="allergy"
-            className="font-semibold w-[90%] max-w-sm mt-8"
-          >
-            Allergy
-          </label>
-          <select
-            className={`h-12 w-[90%] max-w-sm font-semi-bold px-4 border-2 border-gray-300 rounded-sm outline-none hover:shadow-xl transition-shadow ${
-              errors.allergy && touched.allergy ? "border-red-600" : ""
-            }`}
-            id="allergy"
-            value={values.allergy}
-            placeholder="Eg: Male"
-            onChange={handleChange}
-          >
-            <option value="" label="Select an option">
-              --select an option--
-            </option>
-            <option value="yes" label="Yes">
-              Yes
-            </option>
-            <option value="no" label="No">
-              No
-            </option>
-          </select>
-          {errors.allergy && touched.allergy && (
-            <p className="w-[90%] max-w-sm font-medium text-red-500">
-              {errors.allergy}
-            </p>
-          )}
-
-          <label
-            htmlFor="wheezing"
-            className="font-semibold w-[90%] max-w-sm mt-8"
-          >
-            Wheezing
-          </label>
-          <select
-            className={`h-12 w-[90%] max-w-sm font-semi-bold px-4 border-2 border-gray-300 rounded-sm outline-none hover:shadow-xl transition-shadow ${
-              errors.wheezing && touched.wheezing ? "border-red-600" : ""
-            }`}
-            id="wheezing"
-            value={values.wheezing}
-            placeholder="Eg: Male"
-            onChange={handleChange}
-          >
-            <option value="" label="Select an option">
-              --select an option--
-            </option>
-            <option value="yes" label="Yes">
-              Yes
-            </option>
-            <option value="no" label="No">
-              No
-            </option>
-          </select>
-          {errors.wheezing && touched.wheezing && (
-            <p className="w-[90%] max-w-sm font-medium text-red-500">
-              {errors.wheezing}
-            </p>
-          )}
-
-          <label
-            htmlFor="alcohol"
-            className="font-semibold w-[90%] max-w-sm mt-8"
-          >
-            Alcohol
-          </label>
-          <select
-            className={`h-12 w-[90%] max-w-sm font-semi-bold px-4 border-2 border-gray-300 rounded-sm outline-none hover:shadow-xl transition-shadow ${
-              errors.alcohol && touched.alcohol ? "border-red-600" : ""
-            }`}
-            id="alcohol"
-            value={values.alcohol}
-            placeholder="Eg: Male"
-            onChange={handleChange}
-          >
-            <option value="" label="Select an option">
-              --select an option--
-            </option>
-            <option value="yes" label="Yes">
-              Yes
-            </option>
-            <option value="no" label="No">
-              No
-            </option>
-          </select>
-          {errors.alcohol && touched.alcohol && (
-            <p className="w-[90%] max-w-sm font-medium text-red-500">
-              {errors.alcohol}
-            </p>
-          )}
-
-          <label
-            htmlFor="coughing"
-            className="font-semibold w-[90%] max-w-sm mt-8"
-          >
-            Cough
-          </label>
-          <select
-            className={`h-12 w-[90%] max-w-sm font-semi-bold px-4 border-2 border-gray-300 rounded-sm outline-none hover:shadow-xl transition-shadow ${
-              errors.coughing && touched.coughing ? "border-red-600" : ""
-            }`}
-            id="coughing"
-            value={values.coughing}
-            placeholder="Eg: Male"
-            onChange={handleChange}
-          >
-            <option value="" label="Select an option">
-              --select an option--
-            </option>
-            <option value="yes" label="Yes">
-              Yes
-            </option>
-            <option value="no" label="No">
-              No
-            </option>
-          </select>
-          {errors.coughing && touched.coughing && (
-            <p className="w-[90%] max-w-sm font-medium text-red-500">
-              {errors.coughing}
-            </p>
-          )}
-
-          <label
-            htmlFor="shortnessOfBreath"
-            className="font-semibold w-[90%] max-w-sm mt-8"
-          >
-            Shortness of Breath
-          </label>
-          <select
-            className={`h-12 w-[90%] max-w-sm font-semi-bold px-4 border-2 border-gray-300 rounded-sm outline-none hover:shadow-xl transition-shadow ${
-              errors.shortnessOfBreath && touched.shortnessOfBreath
+              errors.presenceOfEdema && touched.presenceOfEdema
                 ? "border-red-600"
                 : ""
             }`}
-            id="shortnessOfBreath"
-            value={values.shortnessOfBreath}
-            placeholder="Eg: Male"
-            onChange={handleChange}
+            id="presenceOfEdema"
+            value={values.presenceOfEdema}
+            onChange={(e) =>
+              setFieldValue("presenceOfEdema", Number(e.target.value))
+            }
           >
             <option value="" label="Select an option">
               --select an option--
             </option>
-            <option value="yes" label="Yes">
-              Yes
+            <option
+              value={0}
+              label="No Edema and No Diuretic therapy for Edema"
+            >
+              No Edema and No Diuretic therapy for Edema
             </option>
-            <option value="no" label="No">
-              No
+            <option
+              value={1}
+              label="Edema Present without Diuretics/ Edema Resolved by Diuretics"
+            >
+              Edema Present without Diuretics/ Edema Resolved by Diuretics
+            </option>
+            <option value={2} label="Edema despite Diuretic Therapy">
+              Edema despite Diuretic Therapy
             </option>
           </select>
-          {errors.shortnessOfBreath && touched.shortnessOfBreath && (
+          {errors.presenceOfEdema && touched.presenceOfEdema && (
             <p className="w-[90%] max-w-sm font-medium text-red-500">
-              {errors.shortnessOfBreath}
+              {errors.presenceOfEdema}
             </p>
           )}
 
           <label
-            htmlFor="swallowingDifficulty"
-            className="font-semibold w-[90%] max-w-sm mt-8"
+            htmlFor="serumBilirubin"
+            className="font-semibold w-[90%] mt-8 max-w-sm"
           >
-            Swallowing Difficulty
+            Serum Bilirubin in (mg/dl)
           </label>
-          <select
+          <input
+            type="number"
+            id="serumBilirubin"
             className={`h-12 w-[90%] max-w-sm font-semi-bold px-4 border-2 border-gray-300 rounded-sm outline-none hover:shadow-xl transition-shadow ${
-              errors.swallowingDifficulty && touched.swallowingDifficulty
-                ? "border-red-600"
+              errors.serumBilirubin && touched.serumBilirubin
+                ? "border-red-500"
                 : ""
             }`}
-            id="swallowingDifficulty"
-            value={values.swallowingDifficulty}
-            placeholder="Eg: Male"
+            value={values.serumBilirubin}
             onChange={handleChange}
-          >
-            <option value="" label="Select an option">
-              --select an option--
-            </option>
-            <option value="yes" label="Yes">
-              Yes
-            </option>
-            <option value="no" label="No">
-              No
-            </option>
-          </select>
-          {errors.swallowingDifficulty && touched.swallowingDifficulty && (
+            onBlur={handleBlur}
+            step="0.01"
+            placeholder="Eg: 89"
+          />
+          {errors.serumBilirubin && touched.serumBilirubin && (
             <p className="w-[90%] max-w-sm font-medium text-red-500">
-              {errors.swallowingDifficulty}
+              {errors.serumBilirubin}
             </p>
           )}
 
           <label
-            htmlFor="chestPain"
-            className="font-semibold w-[90%] max-w-sm mt-8"
+            htmlFor="serumCholesterol"
+            className="font-semibold w-[90%] mt-8 max-w-sm"
           >
-            Chest Pain
+            Serum Cholestrol in (mg/dl)
           </label>
-          <select
+          <input
+            type="number"
+            id="serumCholesterol"
             className={`h-12 w-[90%] max-w-sm font-semi-bold px-4 border-2 border-gray-300 rounded-sm outline-none hover:shadow-xl transition-shadow ${
-              errors.chestPain && touched.chestPain ? "border-red-600" : ""
+              errors.serumCholesterol && touched.serumCholesterol
+                ? "border-red-500"
+                : ""
             }`}
-            id="chestPain"
-            value={values.chestPain}
-            placeholder="Eg: Male"
+            value={values.serumCholesterol}
             onChange={handleChange}
-          >
-            <option value="" label="Select an option">
-              --select an option--
-            </option>
-            <option value="yes" label="Yes">
-              Yes
-            </option>
-            <option value="no" label="No">
-              No
-            </option>
-          </select>
-          {errors.chestPain && touched.chestPain && (
+            onBlur={handleBlur}
+            step="0.01"
+            placeholder="Eg: 89"
+          />
+          {errors.serumCholesterol && touched.serumCholesterol && (
             <p className="w-[90%] max-w-sm font-medium text-red-500">
-              {errors.chestPain}
+              {errors.serumCholesterol}
             </p>
           )}
 
-          <button
-            disabled={isSubmitting}
-            className="my-10 bg-black disabled:opacity-30 text-gray-100 py-4 px-4 rounded"
-            type="submit"
+          <label
+            htmlFor="albumin"
+            className="font-semibold w-[90%] mt-8 max-w-sm"
           >
-            Predict
-          </button>
+            Albumin in (mg/dl)
+          </label>
+          <input
+            type="number"
+            id="albumin"
+            className={`h-12 w-[90%] max-w-sm font-semi-bold px-4 border-2 border-gray-300 rounded-sm outline-none hover:shadow-xl transition-shadow ${
+              errors.albumin && touched.albumin ? "border-red-500" : ""
+            }`}
+            value={values.albumin}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            step="0.01"
+            placeholder="Eg: 89"
+          />
+          {errors.albumin && touched.albumin && (
+            <p className="w-[90%] max-w-sm font-medium text-red-500">
+              {errors.albumin}
+            </p>
+          )}
+
+          <label
+            htmlFor="urineCopper"
+            className="font-semibold w-[90%] mt-8 max-w-sm"
+          >
+            Urine Copper in (Ug/day)
+          </label>
+          <input
+            type="number"
+            id="urineCopper"
+            className={`h-12 w-[90%] max-w-sm font-semi-bold px-4 border-2 border-gray-300 rounded-sm outline-none hover:shadow-xl transition-shadow ${
+              errors.urineCopper && touched.urineCopper ? "border-red-500" : ""
+            }`}
+            value={values.urineCopper}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            step="0.01"
+            placeholder="Eg: 89"
+          />
+          {errors.urineCopper && touched.urineCopper && (
+            <p className="w-[90%] max-w-sm font-medium text-red-500">
+              {errors.urineCopper}
+            </p>
+          )}
+
+          <label
+            htmlFor="alkalinePhosphate"
+            className="font-semibold w-[90%] mt-8 max-w-sm"
+          >
+            Alkaline Phosphate in (U/Liter)
+          </label>
+          <input
+            type="number"
+            id="alkalinePhosphate"
+            className={`h-12 w-[90%] max-w-sm font-semi-bold px-4 border-2 border-gray-300 rounded-sm outline-none hover:shadow-xl transition-shadow ${
+              errors.alkalinePhosphate && touched.alkalinePhosphate
+                ? "border-red-500"
+                : ""
+            }`}
+            value={values.alkalinePhosphate}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            step="0.01"
+            placeholder="Eg: 89"
+          />
+          {errors.alkalinePhosphate && touched.alkalinePhosphate && (
+            <p className="w-[90%] max-w-sm font-medium text-red-500">
+              {errors.alkalinePhosphate}
+            </p>
+          )}
+
+          <label htmlFor="sgot" className="font-semibold w-[90%] mt-8 max-w-sm">
+            SGOT in (U/liter)
+          </label>
+          <input
+            type="number"
+            id="sgot"
+            className={`h-12 w-[90%] max-w-sm font-semi-bold px-4 border-2 border-gray-300 rounded-sm outline-none hover:shadow-xl transition-shadow ${
+              errors.sgot && touched.sgot ? "border-red-500" : ""
+            }`}
+            value={values.sgot}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            step="0.01"
+            placeholder="Eg: 89"
+          />
+          {errors.sgot && touched.sgot && (
+            <p className="w-[90%] max-w-sm font-medium text-red-500">
+              {errors.sgot}
+            </p>
+          )}
+
+          <label
+            htmlFor="triglycerides"
+            className="font-semibold w-[90%] mt-8 max-w-sm"
+          >
+            Triglycerides in (mg/dl)
+          </label>
+          <input
+            type="number"
+            id="triglycerides"
+            className={`h-12 w-[90%] max-w-sm font-semi-bold px-4 border-2 border-gray-300 rounded-sm outline-none hover:shadow-xl transition-shadow ${
+              errors.triglycerides && touched.triglycerides
+                ? "border-red-500"
+                : ""
+            }`}
+            value={values.triglycerides}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            step="0.01"
+            placeholder="Eg: 89"
+          />
+          {errors.triglycerides && touched.triglycerides && (
+            <p className="w-[90%] max-w-sm font-medium text-red-500">
+              {errors.triglycerides}
+            </p>
+          )}
+
+          <label
+            htmlFor="plateletsPerCubic"
+            className="font-semibold w-[90%] mt-8 max-w-sm"
+          >
+            Platelets per Cubic (ml/1000)
+          </label>
+          <input
+            type="number"
+            id="plateletsPerCubic"
+            className={`h-12 w-[90%] max-w-sm font-semi-bold px-4 border-2 border-gray-300 rounded-sm outline-none hover:shadow-xl transition-shadow ${
+              errors.plateletsPerCubic && touched.plateletsPerCubic
+                ? "border-red-500"
+                : ""
+            }`}
+            value={values.plateletsPerCubic}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            step="0.01"
+            placeholder="Eg: 89"
+          />
+          {errors.plateletsPerCubic && touched.plateletsPerCubic && (
+            <p className="w-[90%] max-w-sm font-medium text-red-500">
+              {errors.plateletsPerCubic}
+            </p>
+          )}
+
+          <label
+            htmlFor="prothrombinTimeInSec"
+            className="font-semibold w-[90%] mt-8 max-w-sm"
+          >
+            Prothrombin Time in Seconds (s)
+          </label>
+          <input
+            type="number"
+            id="prothrombinTimeInSec"
+            className={`h-12 w-[90%] max-w-sm font-semi-bold px-4 border-2 border-gray-300 rounded-sm outline-none hover:shadow-xl transition-shadow ${
+              errors.prothrombinTimeInSec && touched.prothrombinTimeInSec
+                ? "border-red-500"
+                : ""
+            }`}
+            value={values.prothrombinTimeInSec}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            placeholder="Eg: 89"
+          />
+          {errors.prothrombinTimeInSec && touched.prothrombinTimeInSec && (
+            <p className="w-[90%] max-w-sm font-medium text-red-500">
+              {errors.prothrombinTimeInSec}
+            </p>
+          )}
+
+          <div>
+            <button
+              className="my-10 mr-4 border-2 border-black bg-black disabled:opacity-30 text-gray-100 py-4 px-4 rounded"
+              type="submit"
+              disabled={isSubmitting}
+            >
+              Predict
+            </button>
+            <button
+              className="my-10 border-2 border-black disabled:opacity-30 text-black font-semibold py-4 px-4 rounded"
+              onClick={handleReset}
+              type="reset"
+            >
+              Reset
+            </button>
+          </div>
+          {predicted &&
+            (result === 1 ? (
+              <PredictModal
+                text={1}
+                visible={true}
+                disease="Liver Cirrhosis"
+                reset={handleReset}
+              />
+            ) : (
+              <PredictModal
+                text={0}
+                visible={true}
+                disease="Liver Cirrhosis"
+                reset={handleReset}
+              />
+            ))}
         </div>
       </form>
     </div>

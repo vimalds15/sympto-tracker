@@ -17,6 +17,10 @@ const DiseaseService = {
         const {prediction} = await ApiService.predictDisease("diabetesmelitus",formData)
         return prediction
     },
+    predictLiverCirrhosis: async(formData)=>{
+        const {prediction} = await ApiService.predictDisease("livercirrhosis",formData)
+        return prediction
+    },
 }
 
 export default DiseaseService

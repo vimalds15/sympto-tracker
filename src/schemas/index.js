@@ -26,7 +26,6 @@ export const mesotheliomaSchema = yup.object({
 export const liverCirrhosisSchema = yup.object({
   age: yup.number().positive().integer().required("Required"),
   gender: yup.string().required("Required"),
-  drug:yup.string().required("Required"),
   presenceOfAscites:yup.string().required("Required"),
   presenceOfHepatomegaly:yup.string().required("Required"),
   presenceOfSpiders:yup.string().required("Required"),
@@ -34,6 +33,8 @@ export const liverCirrhosisSchema = yup.object({
   serumBilirubin:yup.string().required("Required"),
   serumCholesterol:yup.string().required("Required"),
   albumin:yup.string().required("Required"),
+  urineCopper:yup.string().required("Required"),
+  alkalinePhosphate:yup.string().required("Required"),
   sgot:yup.string().required("Required"),
   triglycerides:yup.string().required("Required"),
   plateletsPerCubic:yup.string().required("Required"),

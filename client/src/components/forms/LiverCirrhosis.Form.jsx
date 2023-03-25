@@ -63,8 +63,12 @@ const LiverCirrhosis = () => {
 
   return (
     <div className="w-full items-center justify-center">
+      <h1 className="text-lg font-bold text-gray-600 text-center mt-8">
+        Liver Cirrhosis
+      </h1>
+
       <form onSubmit={handleSubmit}>
-        <div className="flex items-center justify-center  flex-col mt-10 py-4">
+        <div className="flex items-center justify-center  flex-col mt-6 py-4">
           <label htmlFor="age" className="font-semibold w-[90%] max-w-sm">
             Age
           </label>

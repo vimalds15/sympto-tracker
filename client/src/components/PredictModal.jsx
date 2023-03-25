@@ -15,12 +15,12 @@ const PredictModal = ({text,visible,disease,reset}) => {
 
     useEffect(()=>{
         if(text==1){
-            setBgColor("green-500")
+            setBgColor("bg-green-500")
             setMessage("You are diagnosed")
             setStatus("Yes")
             setBorderColor("border-green-500")
         }else if(text==0){
-            setBgColor("red-500")
+            setBgColor("bg-red-500")
             setMessage("You are not diagnosed")
             setStatus("No")
             setBorderColor("border-red-500")
@@ -39,7 +39,7 @@ const PredictModal = ({text,visible,disease,reset}) => {
         >
         <div className='flex flex-col items-center justify-center p-6'>
           <h2 className='font-bold mb-4'>Prediction Result</h2>
-          <p className={`bg-${bgColor} bg-opacity-50 font-bold border-4 border-dashed ${borderColor} rounded-sm py-2 px-6 my-4`}>{status}</p>
+          <p className={`${bgColor} bg-opacity-50 font-bold border-4 border-dashed ${borderColor} rounded-sm py-2 px-6 my-4`}>{status}</p>
           <p className='text-center mb-4'>{message} with <br /> {disease}</p>
           <button onClick={handleCloseModal} className="px-4 py-2 bg-black text-white rounded-md mt-2 mb-2">Close</button>
         </div>

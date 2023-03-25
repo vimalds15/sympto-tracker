@@ -30,17 +30,15 @@ const DiabetesMellitus = () => {
     handleBlur,
     handleChange,
     handleSubmit,
-    setFieldValue,
   } = useFormik({
     initialValues: {
-      age: '',
-      gender: '',
       pregnancies: '',
       glucose: '',
       diastolicBloodPressure: '',
       tricepsSkinFoldThickness: '',
       serumInsulin: '',
       bodyMassIndex: '',
+      age: '',
       diabetesPedigreeFunction: '',
     },
     validationSchema: diabetesMellitus,
@@ -74,36 +72,6 @@ const DiabetesMellitus = () => {
           )}
 
           <label
-            htmlFor='gender'
-            className='font-semibold w-[90%] max-w-sm mt-8'
-          >
-            Gender
-          </label>
-          <select
-            className={`h-12 w-[90%] max-w-sm font-semi-bold px-4 border-2 border-gray-300 rounded-sm outline-none hover:shadow-xl transition-shadow ${
-              errors.gender && touched.gender ? 'border-red-600' : ''
-            }`}
-            id='gender'
-            value={values.gender}
-            onChange={(e) => setFieldValue('gender', Number(e.target.value))}
-          >
-            <option value='' label='Select an option'>
-              --select an option--
-            </option>
-            <option value={1} label='Male'>
-              Male
-            </option>
-            <option value={0} label='Female'>
-              Female
-            </option>
-          </select>
-          {errors.gender && touched.gender && (
-            <p className='w-[90%] max-w-sm font-medium text-red-500'>
-              {errors.gender}
-            </p>
-          )}
-
-          <label
             htmlFor='pregnancies'
             className='font-semibold w-[90%] mt-8 max-w-sm'
           >
@@ -118,7 +86,7 @@ const DiabetesMellitus = () => {
             value={values.pregnancies}
             onChange={handleChange}
             onBlur={handleBlur}
-            placeholder='Eg: 1'
+            placeholder='Eg: 89'
           />
           {errors.pregnancies && touched.pregnancies && (
             <p className='w-[90%] max-w-sm font-medium text-red-500'>
@@ -141,7 +109,8 @@ const DiabetesMellitus = () => {
             value={values.glucose}
             onChange={handleChange}
             onBlur={handleBlur}
-            placeholder='Eg: 1'
+            step='0.01'
+            placeholder='Eg: 89'
           />
           {errors.glucose && touched.glucose && (
             <p className='w-[90%] max-w-sm font-medium text-red-500'>
@@ -153,7 +122,7 @@ const DiabetesMellitus = () => {
             htmlFor='diastolicBloodPressure'
             className='font-semibold w-[90%] mt-8 max-w-sm'
           >
-            Diastolic Blood Pressure (mm Hg)
+            Blood Pressure (mm Hg)
           </label>
           <input
             type='number'
@@ -166,7 +135,8 @@ const DiabetesMellitus = () => {
             value={values.diastolicBloodPressure}
             onChange={handleChange}
             onBlur={handleBlur}
-            placeholder='Eg: 1'
+            step='0.01'
+            placeholder='Eg: 89'
           />
           {errors.diastolicBloodPressure && touched.diastolicBloodPressure && (
             <p className='w-[90%] max-w-sm font-medium text-red-500'>
@@ -178,7 +148,7 @@ const DiabetesMellitus = () => {
             htmlFor='tricepsSkinFoldThickness'
             className='font-semibold w-[90%] mt-8 max-w-sm'
           >
-            Triceps Skin Fold Thickness (in mm)
+            Skin Thickness (in mm)
           </label>
           <input
             type='number'
@@ -192,7 +162,8 @@ const DiabetesMellitus = () => {
             value={values.tricepsSkinFoldThickness}
             onChange={handleChange}
             onBlur={handleBlur}
-            placeholder='Eg: 1'
+            step='0.01'
+            placeholder='Eg: 89'
           />
           {errors.tricepsSkinFoldThickness &&
             touched.tricepsSkinFoldThickness && (
@@ -205,7 +176,7 @@ const DiabetesMellitus = () => {
             htmlFor='serumInsulin'
             className='font-semibold w-[90%] mt-8 max-w-sm'
           >
-            Serum Insulin (mu U/ml)
+            Insulin (mu U/ml)
           </label>
           <input
             type='number'
@@ -218,7 +189,8 @@ const DiabetesMellitus = () => {
             value={values.serumInsulin}
             onChange={handleChange}
             onBlur={handleBlur}
-            placeholder='Eg: 1'
+            step='0.01'
+            placeholder='Eg: 89'
           />
           {errors.serumInsulin && touched.serumInsulin && (
             <p className='w-[90%] max-w-sm font-medium text-red-500'>
@@ -243,7 +215,8 @@ const DiabetesMellitus = () => {
             value={values.bodyMassIndex}
             onChange={handleChange}
             onBlur={handleBlur}
-            placeholder='Eg: 1'
+            step='0.01'
+            placeholder='Eg: 89'
           />
           {errors.bodyMassIndex && touched.bodyMassIndex && (
             <p className='w-[90%] max-w-sm font-medium text-red-500'>
@@ -267,10 +240,10 @@ const DiabetesMellitus = () => {
                 : ''
             }`}
             value={values.diabetesPedigreeFunction}
-            step='0.01'
+            step='0.001'
             onChange={handleChange}
             onBlur={handleBlur}
-            placeholder='Eg: 1'
+            placeholder='Eg: 89'
           />
           {errors.diabetesPedigreeFunction &&
             touched.diabetesPedigreeFunction && (

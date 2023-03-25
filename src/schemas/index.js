@@ -71,7 +71,6 @@ export const coronaryHeartDisease = yup.object({
 
 export const diabetesMellitus = yup.object({
   age: yup.number().positive().integer("Must be Integer").required("Required"),
-  gender: yup.string().required("Required"),
   pregnancies: yup
     .number()
     .positive()
@@ -80,27 +79,22 @@ export const diabetesMellitus = yup.object({
   glucose: yup
     .number()
     .positive()
-    .integer("Must be Integer")
     .required("Required"),
   diastolicBloodPressure: yup
     .number()
     .positive()
-    .integer("Must be Integer")
     .required("Required"),
   tricepsSkinFoldThickness: yup
     .number()
     .positive()
-    .integer("Must be Integer")
     .required("Required"),
   serumInsulin: yup
     .number()
-    .positive()
-    .integer("Must be Integer")
+
     .required("Required"),
   bodyMassIndex: yup
     .number()
     .positive()
-    .integer("Must be Integer")
     .required("Required"),
   diabetesPedigreeFunction: yup
     .number("Must be Numeric Digits")

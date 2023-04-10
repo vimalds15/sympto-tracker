@@ -5,7 +5,7 @@ import './index.css'
 import axios from "axios"
 import { BrowserRouter } from 'react-router-dom'
 
-axios.defaults.baseURL=import.meta.env.VITE_API_URL
+axios.defaults.baseURL=import.meta.env.VITE_API_RWAY_URL
 
 
 

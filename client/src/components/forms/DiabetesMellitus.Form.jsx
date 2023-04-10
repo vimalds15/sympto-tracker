@@ -3,18 +3,23 @@ import { useFormik } from "formik";
 import { diabetesMellitus } from "../../schemas";
 import DiseaseService from "../../api/disease/disease";
 import PredictModal from "../PredictModal";
+import LoaderSpinner from "../LoaderSpinner";
 
 const DiabetesMellitus = () => {
   const [predicted, setPredicted] = useState(false);
   const [result, setResult] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const onSubmit = async (values, actions) => {
     const formData = Object.values(values);
     try {
+      setLoading(true);
       const prediction = await DiseaseService.predictDiabetesMelitus(formData);
       setPredicted(true);
+      setLoading(false);
       setResult(prediction);
     } catch (error) {
+      setLoading(false);
       console.error(error.message);
     }
   };
@@ -261,6 +266,8 @@ const DiabetesMellitus = () => {
                 {errors.diabetesPedigreeFunction}
               </p>
             )}
+
+          {loading && <LoaderSpinner />}
 
           <div>
             <button

@@ -3,21 +3,26 @@ import { useFormik } from "formik";
 import { chronicKidneyDisease } from "../../schemas";
 import DiseaseService from "../../api/disease/disease";
 import PredictModal from "../PredictModal";
+import LoaderSpinner from "../LoaderSpinner";
 
 const ChronicKidneyDiease = () => {
   const [predicted, setPredicted] = useState(false);
   const [result, setResult] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const onSubmit = async (values, actions) => {
     const formData = Object.values(values);
-    
+
     try {
+      setLoading(true);
       const prediction = await DiseaseService.predictChronicKidneyDisease(
         formData
       );
       setPredicted(true);
+      setLoading(false);
       setResult(prediction);
     } catch (error) {
+      setLoading(false);
       console.error(error.message);
     }
   };
@@ -73,7 +78,9 @@ const ChronicKidneyDiease = () => {
 
   return (
     <div className="w-full items-center justify-center">
-      <h1 className="text-lg font-bold text-gray-600 text-center mt-8">Chronic Kidney Disease</h1>
+      <h1 className="text-lg font-bold text-gray-600 text-center mt-8">
+        Chronic Kidney Disease
+      </h1>
       <form onSubmit={handleSubmit}>
         <div className="flex items-center justify-center  flex-col mt-6 py-4">
           <label htmlFor="age" className="font-semibold w-[90%] max-w-sm">
@@ -694,6 +701,8 @@ const ChronicKidneyDiease = () => {
               {errors.anemia}
             </p>
           )}
+
+          {loading && <LoaderSpinner />}
 
           <div>
             <button

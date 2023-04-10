@@ -8,20 +8,20 @@ import LoaderSpinner from "../LoaderSpinner";
 const CoronaryHeartDisease = () => {
   const [predicted, setPredicted] = useState(false);
   const [result, setResult] = useState(null);
-  const [loading,setLoading]=useState(false)
+  const [loading, setLoading] = useState(false);
 
   const onSubmit = async (values, actions) => {
     const formData = Object.values(values);
     try {
-      setLoading(true)
+      setLoading(true);
       const prediction = await DiseaseService.predictCoronaryHeartDisease(
         formData
       );
       setPredicted(true);
-      setLoading(false)
+      setLoading(false);
       setResult(prediction);
     } catch (error) {
-      setLoading(false)
+      setLoading(false);
       console.error(error.message);
     }
   };

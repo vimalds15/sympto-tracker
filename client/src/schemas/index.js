@@ -64,9 +64,7 @@ export const coronaryHeartDisease = yup.object({
     .number()
     .positive()
     .required("Required"),
-  slopeOfPeakExercise: yup
-    .number()
-    .required("Required"),
+  slopeOfPeakExercise:yup.string().required("Required"),
   numberOfMajorVessels: yup.string().required("Required"),
 });
 

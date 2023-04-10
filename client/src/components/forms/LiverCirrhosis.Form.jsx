@@ -3,18 +3,23 @@ import { useFormik } from "formik";
 import { liverCirrhosisSchema } from "../../schemas";
 import DiseaseService from "../../api/disease/disease";
 import PredictModal from "../PredictModal";
+import LoaderSpinner from "../LoaderSpinner";
 
 const LiverCirrhosis = () => {
   const [predicted, setPredicted] = useState(false);
   const [result, setResult] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const onSubmit = async (values) => {
     const formData = Object.values(values);
     try {
+      setLoading(true);
       const prediction = await DiseaseService.predictLiverCirrhosis(formData);
       setPredicted(true);
+      setLoading(false);
       setResult(prediction);
     } catch (error) {
+      setLoading(false);
       console.error(error.message);
     }
   };
@@ -487,6 +492,8 @@ const LiverCirrhosis = () => {
               {errors.prothrombinTimeInSec}
             </p>
           )}
+
+          {loading && <LoaderSpinner />}
 
           <div>
             <button

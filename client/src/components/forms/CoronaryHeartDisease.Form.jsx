@@ -3,20 +3,25 @@ import { useFormik } from "formik";
 import { coronaryHeartDisease } from "../../schemas";
 import DiseaseService from "../../api/disease/disease";
 import PredictModal from "../PredictModal";
+import LoaderSpinner from "../LoaderSpinner";
 
 const CoronaryHeartDisease = () => {
   const [predicted, setPredicted] = useState(false);
   const [result, setResult] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const onSubmit = async (values, actions) => {
     const formData = Object.values(values);
     try {
+      setLoading(true);
       const prediction = await DiseaseService.predictCoronaryHeartDisease(
         formData
       );
       setPredicted(true);
+      setLoading(false);
       setResult(prediction);
     } catch (error) {
+      setLoading(false);
       console.error(error.message);
     }
   };
@@ -105,10 +110,10 @@ const CoronaryHeartDisease = () => {
             <option value="" label="Select an option">
               --select an option--
             </option>
-            <option value={1} label="Male">
+            <option value={0} label="Male">
               Male
             </option>
-            <option value={0} label="Female">
+            <option value={1} label="Female">
               Female
             </option>
           </select>
@@ -140,17 +145,17 @@ const CoronaryHeartDisease = () => {
             <option value="" label="Select an option">
               --select an option--
             </option>
-            <option value={0} label="Typical Angina">
-              Typical Angina
+            <option value={0} label="Asymptomatic">
+              Asymptomatic
             </option>
-            <option value={1} label="Atypical Angina">
-              Atypical Angina
-            </option>
-            <option value={2} label="Non-Anginal">
+            <option value={1} label="Non-Anginal">
               Non-Anginal
             </option>
-            <option value={3} label="Asymptomatic">
-              Asymptomatic
+            <option value={2} label="Atypical Angina">
+              Atypical Angina
+            </option>
+            <option value={3} label="Typical Angina">
+              Typical Angina
             </option>
           </select>
           {errors.chestPainType && touched.chestPainType && (
@@ -275,11 +280,11 @@ const CoronaryHeartDisease = () => {
             <option value={0} label="Normal">
               Normal
             </option>
-            <option value={1} label="STT Abnormality">
-              STT Abnormality
-            </option>
-            <option value={2} label="LV Hypertrophy">
+            <option value={1} label="LV Hypertrophy">
               LV Hypertrophy
+            </option>
+            <option value={2} label="STT Abnormality">
+              STT Abnormality
             </option>
           </select>
           {errors.restingElectrographicResults &&
@@ -382,20 +387,31 @@ const CoronaryHeartDisease = () => {
           >
             Slope of the Peak Exercise ST segment
           </label>
-          <input
-            type="number"
-            id="slopeOfPeakExercise"
+          <select
             className={`h-12 w-[90%] max-w-sm font-semi-bold px-4 border-2 border-gray-300 rounded-sm outline-none hover:shadow-xl transition-shadow ${
-              errors.slopeOfThePeakExercise && touched.slopeOfThePeakExercise
-                ? "border-red-500"
+              errors.slopeOfPeakExercise && touched.slopeOfPeakExercise
+                ? "border-red-600"
                 : ""
             }`}
+            id="slopeOfPeakExercise"
             value={values.slopeOfPeakExercise}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            step="0.01"
-            placeholder="Eg: 20"
-          />
+            onChange={(e) =>
+              setFieldValue("slopeOfPeakExercise", Number(e.target.value))
+            }
+          >
+            <option value="" label="Select an option">
+              --select an option--
+            </option>
+            <option value={0} label="Flat">
+              Flat
+            </option>
+            <option value={1} label="Upsloping">
+              Upsloping
+            </option>
+            <option value={2} label="Downsloping">
+              Downsloping
+            </option>
+          </select>
           {errors.slopeOfPeakExercise && touched.slopeOfPeakExercise && (
             <p className="w-[90%] max-w-sm font-medium text-red-500">
               {errors.slopeOfPeakExercise}
@@ -442,6 +458,8 @@ const CoronaryHeartDisease = () => {
               {errors.numberOfMajorVessels}
             </p>
           )}
+
+          {loading && <LoaderSpinner />}
 
           <div>
             <button

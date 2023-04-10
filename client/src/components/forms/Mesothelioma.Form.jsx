@@ -3,18 +3,23 @@ import { useFormik } from "formik";
 import { mesotheliomaSchema } from "../../schemas";
 import DiseaseService from "../../api/disease/disease";
 import PredictModal from "../PredictModal";
+import LoaderSpinner from "../LoaderSpinner";
 
 const Mesothelioma = () => {
   const [predicted, setPredicted] = useState(false);
   const [result, setResult] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const onSubmit = async (values) => {
     const formData = Object.values(values);
     try {
+      setLoading(true);
       const prediction = await DiseaseService.predictMesothelioma(formData);
       setPredicted(true);
+      setLoading(false);
       setResult(prediction);
     } catch (error) {
+      setLoading(false);
       console.error(error.message);
     }
   };
@@ -542,6 +547,8 @@ const Mesothelioma = () => {
               {errors.chestPain}
             </p>
           )}
+
+          {loading && <LoaderSpinner />}
 
           <div>
             <button

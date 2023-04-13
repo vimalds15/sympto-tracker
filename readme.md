@@ -25,41 +25,8 @@ Check out the live demo of Sympto Tracker [Preview](https://sympto-tracker.verce
 - Flask: Backend web framework
 - RStudio: Data analysis IDE
 
-## Pages
-
-The following screens are available in Sympto Tracker:
-
-### Home Page
-
-<img src="images/Homepage.png" alt="Homepage" width="600" height="400">
-
-### Mesothelioma
-
-<img src="images/Mesothelomia.png" alt="Mesothelomia" width="650" height="400">
 
 
-### Liver Cirrhosis
-
-<img src="images/Liver Cirrhosis.png" alt="Liver Cirrhosis" width="650" height="400">
-
-
-### Chronic Kidney Disease
-
-<img src="images/Chronic Kidney Disease.png" alt="Chronic Kidney Disease" width="650" height="400">
-
-
-### Coronary Heart Disease
-
-<img src="images/Coronary Heart Disease.png" alt="Coronary Heart Disease" width="650" height="400">
-
-
-### Diabetes Mellitus
-
-<img src="images/Diabetes Mellitus.png" alt="Diabetes Mellitus" width="650" height="400">
-
-## Output
-
-<img src="images/Result.png" alt="Result" width="650" height="400">
 
 
 ## Installation
@@ -101,7 +68,7 @@ Pull requests are welcome. For major changes, please open an issue first to disc
 Sympto-Tracker was developed by:
 
 - [Anto Vimalan](https://github.com/vimalds15)
-- [Aniket Kumar](https://github.com/ak736
+- [Aniket Kumar](https://github.com/ak736)
 - [Prawin RP](https://github.com/PRAWIN392)
 - [Harshit V](https://github.com/harshitv804)
 

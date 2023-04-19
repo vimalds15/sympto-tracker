@@ -1,22 +1,33 @@
+import Heart from "../assets/heart.jpg"
+import Kidney from "../assets/kidney.jpeg"
+import Diab from "../assets/diab.jpg"
+import Liver from "../assets/liver.jpeg"
+import Lungs from "../assets/lungs.jpg"
+
 export const diseases = [
     {
         id:1,
-        name:"MESOTHELIOMA"
+        name:"Mesothelioma",
+        image:Lungs,
     },
     {
         id:2,
-        name:"LIVER CIRRHOSIS"
+        name:"Liver Cirrhosis",
+        image:Liver
     },
     {
         id:3,
-        name:"CHRONIC KIDNEY DISEASE"
+        name:"Chronic Kidney Disease",
+        image:Kidney
     },
     {
         id:4,
-        name:"CORONARY HEART DISEASE"
+        name:"Coronary Heart Disease",
+        image:Heart
     },
     {
         id:5,
-        name:"DIABETES MELLITUS"
+        name:"Diabetes Mellitus",
+        image:Diab
     }
 ]

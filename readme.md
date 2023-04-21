@@ -1,5 +1,8 @@
 # Sympto Tracker
 
+## Live Demo
+Check out the live demo of Sympto Tracker [Preview](https://sympto-tracker.vercel.app/).
+
 Sympto-Tracker is a web application that allows users to track their symptoms and predict the likelihood of developing certain diseases. The application is built using React, Flask, and RStudio, and currently supports the prediction of the following diseases:
 
 - Liver Cirrhosis
@@ -13,10 +16,6 @@ For predicting the disease diagnosis we used Supervised Binary classification Ma
 - Logistic Regression
 - Support Vector Machine
 - XGBoost
-
-## Live Demo
-
-Check out the live demo of Sympto Tracker [Preview](https://sympto-tracker.vercel.app/).
 
 ## Tech Stack
 

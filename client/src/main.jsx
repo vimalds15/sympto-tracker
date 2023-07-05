@@ -5,7 +5,11 @@ import './index.css'
 import axios from "axios"
 import { BrowserRouter } from 'react-router-dom'
 
-axios.defaults.baseURL=import.meta.env.VITE_API_RWAY_URL
+if(import.meta.env.MODE==="development"){
+  axios.defaults.baseURL="http://127.0.0.1:5000/"
+}else{
+  axios.defaults.baseURL=import.meta.env.VITE_API_URL
+}
 
 
 

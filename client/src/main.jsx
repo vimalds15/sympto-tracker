@@ -8,7 +8,7 @@ import { BrowserRouter } from 'react-router-dom'
 if(import.meta.env.MODE==="development"){
   axios.defaults.baseURL="http://127.0.0.1:5000/"
 }else{
-  axios.defaults.baseURL=import.meta.env.VITE_API_RWAY_URL
+  axios.defaults.baseURL=import.meta.env.VITE_API_URL
 }
 
 
